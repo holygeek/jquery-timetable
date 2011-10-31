@@ -1,0 +1,31 @@
+jquery-timetable is a jquery plugin for rendering timetable.
+
+I use it to help prepare my son's school bag.  See www.jadualsekolah.com/demo.
+
+See example.html for an example usage.
+
+The file test.html contains the integration tests using jqunit.
+
+It is still in its infancy stage.
+
+Known issues:
+
+- Does not run on IE7, never tested on other IEs. Fails a few tests on Opera
+  which I haven't had the time to fix.
+- It can only render on a single target on a page. Rendering at multiple target
+  is not supported and the behavior is not tested at all.
+- The time duration is fixed at the top going horizontally and the day are
+  fixed at the left going vertically.
+- I'm sure you'll find many more :)
+
+Improvements are welcomed.
+
+Dependencies:
+
+1. jquery-mColorPicker
+2. jquery-autotype
+
+Run `git submodule init && git submodule update` after cloning, and then open
+test.html in your browser.
+
+It seems to work on Chrome, Firefox and Safari.

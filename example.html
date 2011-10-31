@@ -1,0 +1,62 @@
+<html>
+<head>
+  <title> jquery-timetable example </title>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <script
+    type="text/javascript" src="http://code.jquery.com/jquery-latest.js">
+  </script>
+  <script
+    type="text/javascript" src="lib/jquery-mColorPicker/javascripts/mColorPicker.min.js">
+  </script>
+  <script type="text/javascript">
+  jQuery.fx.off = true;
+  $.fn.mColorPicker.init.showLogo = false;
+  $.fn.mColorPicker.init.allowTransparency = false;
+  $.fn.mColorPicker.defaults.imageFolder = 'lib/jquery-mColorPicker/images/';
+  // Don't load on init as we build the color selector input dynamically
+  $.fn.mColorPicker.init.replace = false;
+  </script>
+  <link rel="stylesheet" href="jquery-timetable.css" type="text/css" media="screen" />
+  <script src="jquery-timetable.js" type="text/javascript"></script>
+  <script>
+  var schedule = {
+      time: {
+          start: {
+              hour: 7,
+              minute: 40
+          },
+          durations: [ 30, 30, 30 ]
+      },
+      dailySlots: {
+          Monday: [
+            { s: 'PE', d: 30 },
+            { s: 'ME', d: 60 }
+          ],
+          Wednesday: [
+            { s: 'ME', d: 70 },
+            { s: 'PE', d: 20 }
+          ],
+          Friday: [
+            { s: 'AI', d: 30 },
+            { s: '', d: 30 },
+            { s: 'AE', d: 30 }
+          ]
+      },
+      bgColor: {
+          ME: 'pink',
+          PE: 'lightblue',
+          AI: 'lightgreen',
+          AE: 'lightyellow'
+      },
+  };
+  $(document).ready(function (){
+      $('#sample').timetable({ schedule: schedule, edit: true });
+      $('#sample').timetable('render');
+  });
+  </script>
+</head>
+<body>
+  <div id="sample"></div>
+</body>
+</html>

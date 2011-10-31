@@ -1,0 +1,6 @@
+[submodule "lib/jquery-autotype"]
+	path = lib/jquery-autotype
+	url = https://github.com/mmonteleone/jquery.autotype
+[submodule "lib/jquery-mColorPicker"]
+	path = lib/jquery-mColorPicker
+	url = https://github.com/meta100/mColorPicker.git

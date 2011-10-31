@@ -1,0 +1,232 @@
+#mColorPickerFooter {
+  display: none;
+}
+#jadual {
+	margin-bottom: 50px;
+}
+.dayBoxTop, .dayBoxBottom {
+	padding: 3px 2px;
+	width: 100px;
+	float: left;
+	margin: 3px;
+	text-align: center;
+}
+button {
+	margin: 2px;
+	background: #99ceef;
+	border-width: 2px;
+	border-bottom: 2px solid #5ea3cd;
+	border-right: 2px solid #5ea3cd;
+	border-top: 2px solid #9ee3ef;
+	border-left: 2px solid #9ee3ef;
+	border-radius: 5px;
+}
+button:hover {
+	cursor: pointer;
+	background: #b9eeff;
+}
+button.selected {
+    background: #e77172;
+    border-bottom: 2px solid #b9484c;
+    border-right: 2px solid #b9484c;
+    border-top: 2px solid #e9787c;
+    border-left: 2px solid #e9787c;
+}
+
+.slot {
+    float: left;
+    border-width: 1px;
+    border-radius: 3px;
+    border-style: solid;
+    height: 20px;
+    text-align: center;
+}
+.clear {
+    clear: both;
+}
+
+/*
+  background: pink;
+  background: #a6c0e5;
+  background: #e7d9c3;
+  background: #fed067;
+  background: #ba8b71;
+  background: #ff68ff;
+  background: #d1cffa;
+  background: #ff6500;
+  background: #66cfcf;
+  background: #9a669a;
+ */
+
+.inout, #schoolbagContainer, .arrow {
+	float: left;
+	font-size: 26pt;
+}
+#schoolbagContainer {
+    margin-top: 30px;
+}
+#inoutcontainer {
+	margin-top: 50px;
+    width: 100%;
+    /*width: 510px; *//*   put  arrow bag  arrow put
+                       140 + 50 + 125 + 50 + 140 + (5px extra for firefox?) */
+    margin-left: auto;
+    margin-right: auto;
+}
+.inout {
+    max-width: 37%;
+	/* width: 140px; */
+}
+.arrow {
+	padding-top: 66px;
+	width: 1em;
+	font-size: 38pt;
+	font-weight: bolder;
+}
+.boxee {
+	border-radius: 3px;
+	text-align: center;
+	float: left;
+	margin: 1px;
+	padding: 1px 5px;
+}
+.slot, .time {
+    padding-top: 5px;
+    height: 25px;
+}
+.time {
+    float: left;
+    border: 1px solid black;
+    border-radius: 3px;
+    font-size: 7pt;
+    text-align: center;
+}
+#compareContainer1, #compareContainer2 {
+    width: 100%;
+    float: left;
+}
+.taketext {
+  padding-top: 30px;
+  font-size: 14px;
+  height: 30px;
+  width: 100%;
+  text-align: center;
+  clear:both;
+  margin-bottom: 5px;
+}
+#compareContainer {
+	float: left;
+	text-align: center;
+	width: 100%;
+    margin-top: 50px;
+}
+#prevNextButtonsContainer {
+    width: 154px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#prevButton {
+    margin-right: 2px;
+}
+.compareTitle, #nextButton, #prevButton {
+	width: 60px;
+}
+#nextButton, #prevButton {
+	display: block;
+    float: left;
+}
+.compareTitle {
+    float: left;
+	text-align: right;
+    padding-top: 7px;
+}
+.editWidget {
+    display: none;
+}
+#editOption {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: white;
+}
+#editOption button {
+	position: absolute;
+	width: 25px;
+	height: 20px;
+	font-size: 8pt;
+}
+#startDay, #startMinute {
+    margin-right: 10px;
+}
+#dayTimeScale {
+    margin-bottom: 10px;
+}
+
+.dialog, #editSubjectDialog, #editTimeDialog, #overlay {
+    border-radius: 5px;
+}
+.dialog, #editSubjectDialog, #editTimeDialog {
+    display: none;
+    position: absolute;
+    border: 2px solid lightblue;
+    background: white;
+    padding: 5px;
+}
+#editSubjectDialog label.leftlabel,
+#editTimeDialog label.leftlabel,
+{
+    width: 80px;
+}
+#editSubjectDialog label,
+#editSubjectDialog input,
+#editTimeDialog label,
+#editTimeDialog input
+{
+    display: block;
+    float: left;
+}
+#editSubjectDialog label,
+#editTimeDialog label {
+    text-align: right;
+}
+#editSubjectDialog div,
+#editTimeDialog div {
+    clear: both;
+}
+.buttonsC {
+    width: 120px;
+}
+.buttonsC button {
+  float: right;
+  margin: 2px;
+}
+#watchc {
+    float: right;
+}
+#bookButtonsC {
+    width: 110px;
+    float: right;
+}
+#bookButtonsC button {
+    float: left;
+}
+#inoutbook {
+    clear: both;
+    padding-top: 10px;
+}
+th {
+    align: center;
+}
+#inoutbook td {
+  vertical-align: top;
+}
+#bookInHeader {
+	background: #99ceef;
+}
+#bookOutHeader {
+    background: #e77172;
+}
+#adddurationc {
+    width: 120px;
+    float: left;
+}
