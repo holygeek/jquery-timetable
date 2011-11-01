@@ -413,7 +413,8 @@ asyncTest("Change duration of last time slot from 30 to 60", function() {
 asyncTest("Change duration of Monday's last subject from 30 to 60", function() {
   var mondayLastSubject,
       currentDurationShown,
-      newDuration
+      newDuration,
+      expectedWidth
   ;
   expect(5);
   mondayLastSubject = $('#j0_3');
