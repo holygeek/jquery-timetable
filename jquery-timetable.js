@@ -1,5 +1,6 @@
 /*jslint browser: true, node: true, continue: true */
 (function( $, undefined ){
+    "use strict";
     // TODO show subject start minute, duration on mouse over?
     // TODO complaint if adding book to a subject with an empty name?
     // TODO test.js: make others use selectPrev and selectNext too
