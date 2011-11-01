@@ -819,7 +819,6 @@ asyncTest("Serialize", function() {
         keyCount += 1;
         ok(expectedTopLevelKeys[key], key + " is one of allowed toplevel keys in j");
     }
-    console.log(j);
     equals(keyCount, 6, "There are exactly six entries in j after serialization");
 
     ok(firstSubjectMonday.nobook == 1, ".nobook exists after serialization");
