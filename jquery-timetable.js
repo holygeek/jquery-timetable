@@ -86,10 +86,11 @@
     }
     function putAbsBottomOf(ref, box) {
         var offset,
-            width;
-        ref = $('#'+ref);
-        offset = ref.offset();
-        height = ref.outerHeight();
+            width,
+            ref = $('#'+ref),
+            offset = ref.offset(),
+            height = ref.outerHeight()
+        ;
         $('#'+box).css({
             left: offset.left + 'px',
             top: offset.top + height + 'px'
@@ -1532,7 +1533,9 @@
             booklisttable = $('#booklist'),
             usehere,
             bookname,
-            assumeUseAllBook = false;
+            assumeUseAllBook = false,
+            slotBookDict
+        ;
 
         if (slot.s !== subjectName) {
             assumeUseAllBook = true;
