@@ -1,5 +1,6 @@
 // FIXME Hoist all vars
 $(document).ready(function(){
+"use strict";
 // Ensure asyncTest are run asynchronously, no matter what. See
 // https://github.com/jquery/qunit/issues/138
 QUnit.config.reorder = false;
