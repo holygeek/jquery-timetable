@@ -326,6 +326,25 @@
             }
         }
     }
+    function populateInOutBooksRow(tr, subject) {
+        var j, bookname, allBooks, bookTd, hasBookListed = 0;
+        tr.append(_td().append(_buildTakeInOutDiv(subject)));
+        allBooks = getBooksFor(subject);
+        if (allBooks.length) {
+            bookTd = _td();
+            for (j = 0; j < allBooks.length; j++) {
+                bookname = allBooks[j];
+                if (subject.books && subject.books[bookname]) {
+                    bookTd.append(_div().html(bookname));
+                    hasBookListed = 1;
+                }
+            }
+            tr.append(bookTd);
+        } else {
+            tr.append(emptyTd());
+        }
+        return hasBookListed;
+    }
     function populateInOutBooks(node, takein_subjects, takeout_subjects) {
         var table = _table(),
             putInHeader =_th().html('In').attr({'colspan': 2, 'id': 'bookInHeader'}),
@@ -1152,25 +1171,6 @@
         }
         setCompare(0, day, '#t'+day, 'dayBoxTop');
         setCompare(1, nextDay, '#b'+nextDay, 'dayBoxBottom');
-    }
-    function populateInOutBooksRow(tr, subject) {
-        var j, bookname, allBooks, bookTd, hasBookListed = 0;
-        tr.append(_td().append(_buildTakeInOutDiv(subject)));
-        allBooks = getBooksFor(subject);
-        if (allBooks.length) {
-            bookTd = _td();
-            for (j = 0; j < allBooks.length; j++) {
-                bookname = allBooks[j];
-                if (subject.books && subject.books[bookname]) {
-                    bookTd.append(_div().html(bookname));
-                    hasBookListed = 1;
-                }
-            }
-            tr.append(bookTd);
-        } else {
-            tr.append(emptyTd());
-        }
-        return hasBookListed;
     }
     function getSelectedIndex(el) {
         if (onSubject) {
