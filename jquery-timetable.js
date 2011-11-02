@@ -117,6 +117,12 @@
             extras.epilogue();
         }
     }
+    function pad0(n) {
+        if (n < 10) {
+            return '0' + n;
+        }
+        return n;
+    }
     function Time(hour, minute) {
         if (typeof hour === 'undefined') {
             hour = 0;
@@ -152,13 +158,6 @@
         };
 
         return this;
-    }
-    function pad0(n)
-    {
-        if (n < 10) {
-            return '0' + n;
-        }
-        return n;
     }
 
     function registerBindingForClearance(idOrClass, eventName) {
