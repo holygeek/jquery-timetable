@@ -1801,6 +1801,29 @@
         $(containerId).append(editSubjectDialog);
         $('#' + id).mColorPicker();
     }
+    function addBookInView(evt) {
+        var name,
+            booklisttable,
+            nbooks,
+            usehere
+        ;
+        name = replaceUnsaveChars(trimString($('#bookname').val()));
+        if (name.length === 0) {
+            return;
+        }
+        // Replace multiple spaces with only one
+        name = replaceUnsaveChars(name.replace(/ {1} */g, ' '));
+        booklisttable = $('#booklist');
+        nbooks = booklisttable.children().length;
+        usehere = true;
+        if (booklisttable.children().size() === 0) {
+            addBookListTableHeader(booklisttable);
+        }
+
+        booklisttable.append(createBookListEntry(nbooks, name, usehere));
+        dirtyBookList = $('#booklistheader').html();
+        $('#addBookOk').fadeIn();
+    }
     function _buildAddBookDialog(containerId) {
         var addBookDialog,
             booklistc,
@@ -1972,29 +1995,6 @@
             usehere = slotBookDict[bookname] || assumeUseAllBook;
             booklisttable.append(createBookListEntry(i, bookname, usehere));
         }
-    }
-    function addBookInView(evt) {
-        var name,
-            booklisttable,
-            nbooks,
-            usehere
-        ;
-        name = replaceUnsaveChars(trimString($('#bookname').val()));
-        if (name.length === 0) {
-            return;
-        }
-        // Replace multiple spaces with only one
-        name = replaceUnsaveChars(name.replace(/ {1} */g, ' '));
-        booklisttable = $('#booklist');
-        nbooks = booklisttable.children().length;
-        usehere = true;
-        if (booklisttable.children().size() === 0) {
-            addBookListTableHeader(booklisttable);
-        }
-
-        booklisttable.append(createBookListEntry(nbooks, name, usehere));
-        dirtyBookList = $('#booklistheader').html();
-        $('#addBookOk').fadeIn();
     }
     function hideAddBookDialog(evt) {
         $('#addBookDialog').hide();
