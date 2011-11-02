@@ -1194,6 +1194,15 @@
         $('#subjectBgColor').bind('change', updateSubjectBagroundColor);
         registerBindingForClearance('#subjectBgColor', 'change');
     }
+    function _setCompare() {
+        var id = $(this).attr('id'),
+            dayIdx = parseInt(id.replace(/^[bt]/, ''), 10);
+        if ($(this).attr('id').match(/^b/)) {
+            _setCompareNextDay(dayIdx, this);
+        } else {
+            _setComparePrevDay(dayIdx, this);
+        }
+    }
     function _buildCompareContainer(parentContainer, containerId, title, buttonIdPrefix, klass) {
         var button,
             compareContainer = _div(containerId),
@@ -1276,15 +1285,6 @@
         inOutContainer.append(takeInDiv, arrow1, schoolBagContainer, arrow2, takeOutDiv);
 
         $(containerId).append(inOutContainer);
-    }
-    function _setCompare() {
-        var id = $(this).attr('id'),
-            dayIdx = parseInt(id.replace(/^[bt]/, ''), 10);
-        if ($(this).attr('id').match(/^b/)) {
-            _setCompareNextDay(dayIdx, this);
-        } else {
-            _setComparePrevDay(dayIdx, this);
-        }
     }
     function _buildPrevNextButtons(containerId) {
         var prevButton = _button('prevButton').html('&lt;').attr('title', 'Move back one day'),
