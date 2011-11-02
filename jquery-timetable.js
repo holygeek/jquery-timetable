@@ -1465,6 +1465,25 @@
             return _editTime(elementToEdit);
         }
     }
+    function _insertNewSubjectSlot(offset, relativeTo) {
+        var i = getSelectedIndex(relativeTo),
+            newSlot = { s: '', d: mostFrequentDuration },
+            idx = i.idx + offset,
+            id,
+            brandNew
+        ;
+        settings.schedule.internal[i.row].splice(idx, 0, newSlot);
+        hideEdit();
+        rerender();
+        id = getId(i.row, idx);
+        $(id).css('display', 'none');
+        elementToEdit = id;
+        $(id).show('fast', function() {
+                brandNew = 1;
+                _editSubject(brandNew, elementToEdit);
+            }
+        );
+    }
     function _insertNewSlot (offset, relativeTo) {
         thisIsANewSlot = 1;
         if (onSubject) {
@@ -1959,25 +1978,6 @@
         id = 'time' + idx;
         $(id).css('display', 'none');
         $(id).show();
-    }
-    function _insertNewSubjectSlot(offset, relativeTo) {
-        var i = getSelectedIndex(relativeTo),
-            newSlot = { s: '', d: mostFrequentDuration },
-            idx = i.idx + offset,
-            id,
-            brandNew
-        ;
-        settings.schedule.internal[i.row].splice(idx, 0, newSlot);
-        hideEdit();
-        rerender();
-        id = getId(i.row, idx);
-        $(id).css('display', 'none');
-        elementToEdit = id;
-        $(id).show('fast', function() {
-                brandNew = 1;
-                _editSubject(brandNew, elementToEdit);
-            }
-        );
     }
     function overlayOff(above) {
         $('#overlay').hide();
