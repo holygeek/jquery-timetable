@@ -31,6 +31,15 @@
         currMouseOvered = '',
         KEY_ENTER = 13,
         KEY_ESC = 27,
+        _createElement = function(type, id) {
+            // This form is faster than $('<div>'). See
+            // http://stackoverflow.com/questions/327047/what-is-the-most-efficient-way-to-create-html-elements-using-jquery
+            var el = document.createElement(type);
+            if (id) {
+                el.id = id;
+            }
+            return el;
+        },
         // FIXME Refactor this? Use dict h (for html), h = { tr: htmlGenerator('tr') }
         // may cause more typing: _div('foo') vs. h.div('foo')
         htmlGenerator = function(type) {
@@ -108,15 +117,6 @@
         if(extras.epilogue) {
             extras.epilogue();
         }
-    }
-    function _createElement(type, id) {
-        // This form is faster than $('<div>'). See
-        // http://stackoverflow.com/questions/327047/what-is-the-most-efficient-way-to-create-html-elements-using-jquery
-        var el = document.createElement(type);
-        if (id) {
-            el.id = id;
-        }
-        return el;
     }
     function Time(hour, minute) {
         if (typeof hour === 'undefined') {
