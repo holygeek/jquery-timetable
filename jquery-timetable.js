@@ -538,6 +538,10 @@
     function _updateStartMinute() {
       updateStartTime('minute');
     }
+    function updateScale(evt) {
+        settings.schedule.pixel_per_minute = $(this).val();
+        rerender();
+    }
     function _buildDayTimeScaleWidget(containerId) {
         var dayTimeScale = _div('dayTimeScale').attr('class','editWidget'),
             daySelect = _select('startDay'),
@@ -752,10 +756,6 @@
         shiftUntil(shortDayName);
         rerender();
         updatePrevNextButtonText(newStartDay, prevDaySelected, nextDaySelected);
-    }
-    function updateScale(evt) {
-        settings.schedule.pixel_per_minute = $(this).val();
-        rerender();
     }
     function clearAllEventBindings() {
         var eventName, classOrId,
