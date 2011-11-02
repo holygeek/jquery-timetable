@@ -1825,6 +1825,10 @@
         }
         return target;
     }
+    function getBookNameFromRowIndex(bookRowIdx) {
+        var bookNameId = '#bookName_' + bookRowIdx;
+        return $(bookNameId).html();
+    }
     function getBookNameFromCheckbox(checkbox) {
         var checkboxId = $(checkbox).attr('id'),
             bookRowIdx = checkboxId.split('_')[1],
@@ -2068,10 +2072,6 @@
     }
     function setPendingSlotBooksAction(bookname, use_or_not) {
         pendingSlotBooksAction[bookname] = use_or_not;
-    }
-    function getBookNameFromRowIndex(bookRowIdx) {
-        var bookNameId = '#bookName_' + bookRowIdx;
-        return $(bookNameId).html();
     }
     function removeBookInView(evt) {
         // Called when 'remove' <a> link is clicked
