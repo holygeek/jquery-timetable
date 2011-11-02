@@ -1,4 +1,5 @@
 /*jslint browser: true, node: true, continue: true */
+/*global alert */
 (function( $, undefined ){
     "use strict";
     // TODO show subject start minute, duration on mouse over?
