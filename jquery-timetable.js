@@ -200,6 +200,24 @@
         }
         return ! subject.nobook;
     }
+    function getNeededBooks(subject, list_of_subject) {
+        var i,
+            slot,
+            bookname,
+            neededBooks = {};
+
+        for (i = 1; i < list_of_subject.length; i++) {
+            slot = list_of_subject[i];
+            if (slot.s === subject.s) {
+                for (bookname in slot.books) {
+                    if (slot.books.hasOwnProperty(bookname) && slot.books[bookname]) {
+                        neededBooks[bookname] = true;
+                    }
+                }
+            }
+        }
+        return neededBooks;
+    }
     function compareSameSubjectBooks(subject, prev, next) {
         var hasBookToRemove,
             hasBookToAdd,
@@ -1004,24 +1022,6 @@
     }
     function _shiftStartDayBackward() {
         settings.schedule.internal.push(settings.schedule.internal.shift());
-    }
-    function getNeededBooks(subject, list_of_subject) {
-        var i,
-            slot,
-            bookname,
-            neededBooks = {};
-
-        for (i = 1; i < list_of_subject.length; i++) {
-            slot = list_of_subject[i];
-            if (slot.s === subject.s) {
-                for (bookname in slot.books) {
-                    if (slot.books.hasOwnProperty(bookname) && slot.books[bookname]) {
-                        neededBooks[bookname] = true;
-                    }
-                }
-            }
-        }
-        return neededBooks;
     }
     function addBookDiffEntry(subject, take, bookDiff) {
         var bookname,
