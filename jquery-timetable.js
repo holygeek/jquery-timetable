@@ -1852,6 +1852,22 @@
         }
         $('#addBookOk').show();
     }
+    function removeBookInView(evt) {
+        // Called when 'remove' <a> link is clicked
+        var id = $(this).attr('id'),
+            indexToRemove = _intValue(id.split('_')[1]),
+            bookname = getBookNameFromRowIndex(indexToRemove),
+            td = this.parentNode,
+            tr = td.parentNode,
+            table = tr.parentNode
+        ;
+        setPendingSlotBooksAction(bookname, DO_NOT_USE_HERE);
+        $(this).unbind('click');
+        table.removeChild(tr);
+        dirtyBookList = $('#booklistheader').html();
+        $('#addBookOk').fadeIn();
+        return false;
+    }
     function createBookListEntry(index, name, usehere) {
         var bookname = _td('bookName_' + index).html(name).attr('class', 'survivingBook'),
             checkboxInTd = _td()
@@ -2072,22 +2088,6 @@
     function overlayOff(above) {
         $('#overlay').hide();
         $(above).css('z-index', 0);
-    }
-    function removeBookInView(evt) {
-        // Called when 'remove' <a> link is clicked
-        var id = $(this).attr('id'),
-            indexToRemove = _intValue(id.split('_')[1]),
-            bookname = getBookNameFromRowIndex(indexToRemove),
-            td = this.parentNode,
-            tr = td.parentNode,
-            table = tr.parentNode
-        ;
-        setPendingSlotBooksAction(bookname, DO_NOT_USE_HERE);
-        $(this).unbind('click');
-        table.removeChild(tr);
-        dirtyBookList = $('#booklistheader').html();
-        $('#addBookOk').fadeIn();
-        return false;
     }
     function _removeDictEntriesExcept(keysWanted, dict) {
         var entry;
