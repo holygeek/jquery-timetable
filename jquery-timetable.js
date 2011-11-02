@@ -2010,6 +2010,39 @@
 
         hideAddBookDialog();
     }
+    function renderBookList(evt) {
+        pendingSlotBooksAction = {};
+        var subjectName = replaceUnsaveChars($('#newSubject').val()),
+            idx = getSelectedIndex(elementToEdit),
+            slot = settings.schedule.internal[idx.row][idx.idx],
+            booklist,
+            i,
+            booklisttable = $('#booklist'),
+            usehere,
+            bookname,
+            assumeUseAllBook = false,
+            slotBookDict
+        ;
+
+        if (slot.s !== subjectName) {
+            assumeUseAllBook = true;
+        }
+        booklist =  getBooksFor({s:subjectName});
+
+        dirtyBookList = false;
+
+        $('#booklistheader').html(subjectName);
+        if (booklist.length > 0) {
+            addBookListTableHeader(booklisttable);
+        }
+
+        slotBookDict = getOrCreateSlotBookDict(slot);
+        for (i = 0; i < booklist.length; i++) {
+            bookname = booklist[i];
+            usehere = slotBookDict[bookname] || assumeUseAllBook;
+            booklisttable.append(createBookListEntry(i, bookname, usehere));
+        }
+    }
     function _buildAddBookDialog(containerId) {
         var addBookDialog,
             booklistc,
@@ -2055,39 +2088,6 @@
 
         addBookDialog.bind('renderbooklist', renderBookList);
         $(containerId).append(addBookDialog);
-    }
-    function renderBookList(evt) {
-        pendingSlotBooksAction = {};
-        var subjectName = replaceUnsaveChars($('#newSubject').val()),
-            idx = getSelectedIndex(elementToEdit),
-            slot = settings.schedule.internal[idx.row][idx.idx],
-            booklist,
-            i,
-            booklisttable = $('#booklist'),
-            usehere,
-            bookname,
-            assumeUseAllBook = false,
-            slotBookDict
-        ;
-
-        if (slot.s !== subjectName) {
-            assumeUseAllBook = true;
-        }
-        booklist =  getBooksFor({s:subjectName});
-
-        dirtyBookList = false;
-
-        $('#booklistheader').html(subjectName);
-        if (booklist.length > 0) {
-            addBookListTableHeader(booklisttable);
-        }
-
-        slotBookDict = getOrCreateSlotBookDict(slot);
-        for (i = 0; i < booklist.length; i++) {
-            bookname = booklist[i];
-            usehere = slotBookDict[bookname] || assumeUseAllBook;
-            booklisttable.append(createBookListEntry(i, bookname, usehere));
-        }
     }
     function _removeDictEntriesExcept(keysWanted, dict) {
         var entry;
