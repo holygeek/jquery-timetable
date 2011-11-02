@@ -254,6 +254,20 @@
         }
         return result;
     }
+    function getSubjectCssClassName(subject) {
+        // FIXME replace invalid css characters to '-'
+        if (subject.s) {
+            return('s_' + subject.s.replace(/ /g, '_'));
+        }
+        return '';
+    }
+    function getSubjectBgColor(subject) {
+        var className = getSubjectCssClassName(subject);
+        if (className.length > 0) {
+            return settings.schedule.bgColor[className] || 'white';
+        }
+        return 'white';
+    }
     function _buildTakeInOutDiv(subject, extraclass) {
         var subjectname = subject.s;
         extraclass = extraclass || '';
@@ -627,20 +641,6 @@
                     epilogue: function() {html.push(_clearDiv);}
                 }
         );
-    }
-    function getSubjectBgColor(subject) {
-        var className = getSubjectCssClassName(subject);
-        if (className.length > 0) {
-            return settings.schedule.bgColor[className] || 'white';
-        }
-        return 'white';
-    }
-    function getSubjectCssClassName(subject) {
-        // FIXME replace invalid css characters to '-'
-        if (subject.s) {
-            return('s_' + subject.s.replace(/ /g, '_'));
-        }
-        return '';
     }
     function shiftUntil(shortDayName) {
         while (shortDayName !== _getFirstDay()) {
