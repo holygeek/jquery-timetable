@@ -933,6 +933,9 @@
             $('#removeSlot').hide();
         }
     }
+    function setButtonEnabled(button, enabled) {
+        $(button).attr('disabled', !enabled);
+    }
     function hideEditSubjectDialog(evt, fromOKButton) {
         var doAfterHideDialog;
         setButtonEnabled('#addduration', true);
@@ -1899,9 +1902,6 @@
         $('#addBookDialog').hide();
         overlayOff('#addBookDialog');
         $('#addBookOk').hide();
-    }
-    function setButtonEnabled(button, enabled) {
-        $(button).attr('disabled', !enabled);
     }
     function _insertNewTimeSlot(offset, defaultDuration, relativeTo) {
         var i = getSelectedIndex(relativeTo),
