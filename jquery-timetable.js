@@ -1810,6 +1810,21 @@
         }
         booklisttable.append.apply(booklisttable, headers);
     }
+    function getEventTarget(evt) {
+        var target;
+        if (!evt) {
+            evt = window.event;
+        }
+        if (evt.target) {
+            target = evt.target;
+        } else if (evt.srcElement) {
+            target = evt.srcElement;
+        }
+        if (target.nodeType === 3) { // defeat Safari bug
+            target = target.parentNode;
+        }
+        return target;
+    }
     function updatePendingSlotBooksAction(evt) {
         var checkbox,
             bookname
@@ -2073,21 +2088,6 @@
         dirtyBookList = $('#booklistheader').html();
         $('#addBookOk').fadeIn();
         return false;
-    }
-    function getEventTarget(evt) {
-        var target;
-        if (!evt) {
-            evt = window.event;
-        }
-        if (evt.target) {
-            target = evt.target;
-        } else if (evt.srcElement) {
-            target = evt.srcElement;
-        }
-        if (target.nodeType === 3) { // defeat Safari bug
-            target = target.parentNode;
-        }
-        return target;
     }
     function _removeDictEntriesExcept(keysWanted, dict) {
         var entry;
