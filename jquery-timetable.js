@@ -94,8 +94,7 @@
         });
     }
     function putAbsBottomOf(ref, box) {
-        var offset,
-            width,
+        var width,
             refEl = $('#'+ref),
             offset = refEl.offset(),
             height = refEl.outerHeight()
