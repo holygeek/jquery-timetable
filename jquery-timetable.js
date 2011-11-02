@@ -1125,6 +1125,13 @@
         $('#' + timetableId).css('width', timetableWidth + width + 'px');
         $(elementToEdit).animate({width: width + 'px'});
     }
+    function updateSubjectBagroundColor(evt) {
+        var subject = $(elementToEdit).html(),
+            klass = getSubjectCssClassName({ s:subject });
+
+        $('.' + klass).css('background-color', $(this).val());
+        $(elementToEdit).css('background-color', $(this).val());
+    }
     function enableEditMode() {
 
         var time = settings.schedule.time,
@@ -1186,13 +1193,6 @@
 
         $('#subjectBgColor').bind('change', updateSubjectBagroundColor);
         registerBindingForClearance('#subjectBgColor', 'change');
-    }
-    function updateSubjectBagroundColor(evt) {
-        var subject = $(elementToEdit).html(),
-            klass = getSubjectCssClassName({ s:subject });
-
-        $('.' + klass).css('background-color', $(this).val());
-        $(elementToEdit).css('background-color', $(this).val());
     }
     function _buildCompareWidget(containerId) {
         var id = 'compareContainer';
