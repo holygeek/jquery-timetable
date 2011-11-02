@@ -326,6 +326,14 @@
             }
         }
     }
+    function getBooksFor(subject) {
+        var cssClass = getSubjectCssClassName(subject);
+        var booksFor = settings.schedule.booksFor;
+        if (!booksFor[cssClass]) {
+            booksFor[cssClass] = [];
+        }
+        return  booksFor[cssClass];
+    }
     function populateInOutBooksRow(tr, subject) {
         var j, bookname, allBooks, bookTd, hasBookListed = 0;
         tr.append(_td().append(_buildTakeInOutDiv(subject)));
@@ -1566,14 +1574,6 @@
             slot.books = {};
         }
         return slot.books;
-    }
-    function getBooksFor(subject) {
-        var cssClass = getSubjectCssClassName(subject);
-        var booksFor = settings.schedule.booksFor;
-        if (!booksFor[cssClass]) {
-            booksFor[cssClass] = [];
-        }
-        return  booksFor[cssClass];
     }
     function renderBookList(evt) {
         pendingSlotBooksAction = {};
