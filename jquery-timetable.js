@@ -167,6 +167,37 @@
         settings.eventBindings[eventName][idOrClass] = 1;
     }
 
+    function updateStartTime(hour_or_minute) {
+            var newValue,
+                time = settings.schedule.time;
+            if (hour_or_minute === 'hour') {
+                newValue = _intValue($('#startHour').val());
+                if (isNaN(newValue)) {
+                    return;
+                }
+                if (time.start.hour === newValue) {
+                    return;
+                }
+                time.start.hour = newValue;
+            }
+            if (hour_or_minute === 'minute') {
+                newValue = _intValue($('#startMinute').val());
+                if (isNaN(newValue)) {
+                    return;
+                }
+                if (time.start.minute === newValue) {
+                    return;
+                }
+                time.start.minute = newValue;
+            }
+            rerender();
+    }
+    function _updateStartHour() {
+      updateStartTime('hour');
+    }
+    function _updateStartMinute() {
+      updateStartTime('minute');
+    }
     function _buildDayTimeScaleWidget(containerId) {
         var dayTimeScale = _div('dayTimeScale').attr('class','editWidget'),
             daySelect = _select('startDay'),
@@ -395,37 +426,6 @@
         shiftUntil(shortDayName);
         rerender();
         updatePrevNextButtonText(newStartDay, prevDaySelected, nextDaySelected);
-    }
-    function _updateStartHour() {
-      updateStartTime('hour');
-    }
-    function _updateStartMinute() {
-      updateStartTime('minute');
-    }
-    function updateStartTime(hour_or_minute) {
-            var newValue,
-                time = settings.schedule.time;
-            if (hour_or_minute === 'hour') {
-                newValue = _intValue($('#startHour').val());
-                if (isNaN(newValue)) {
-                    return;
-                }
-                if (time.start.hour === newValue) {
-                    return;
-                }
-                time.start.hour = newValue;
-            }
-            if (hour_or_minute === 'minute') {
-                newValue = _intValue($('#startMinute').val());
-                if (isNaN(newValue)) {
-                    return;
-                }
-                if (time.start.minute === newValue) {
-                    return;
-                }
-                time.start.minute = newValue;
-            }
-            rerender();
     }
     function updateScale(evt) {
         settings.schedule.pixel_per_minute = $(this).val();
