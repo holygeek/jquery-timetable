@@ -959,6 +959,24 @@
         $(id).hide('fast');
         rerender();
     }
+    function removeTime(target) {
+        var i,
+            idx
+        ;
+        // FIXME Get rid of this if? run test to ensure it is safe
+        if (! currMouseOvered) {
+            return;
+        }
+        if (settings.schedule.time.durations.length === 1) {
+            return;
+        }
+        i = getSelectedIndex(target);
+        idx = i.idx;
+        settings.schedule.time.durations.splice(idx, 1);
+        hideEdit();
+        $(currMouseOvered).hide('fast');
+        rerender();
+    }
     function removeSlot(evt, elementToRemove) {
         var slotToRemove = elementToRemove || currMouseOvered;
         if (onSubject) {
@@ -1786,24 +1804,6 @@
         editDialogIsVisible = 1;
         editSubjectDialog.show('fast');
         $('#newSubject').focus().select();
-    }
-    function removeTime(target) {
-        var i,
-            idx
-        ;
-        // FIXME Get rid of this if? run test to ensure it is safe
-        if (! currMouseOvered) {
-            return;
-        }
-        if (settings.schedule.time.durations.length === 1) {
-            return;
-        }
-        i = getSelectedIndex(target);
-        idx = i.idx;
-        settings.schedule.time.durations.splice(idx, 1);
-        hideEdit();
-        $(currMouseOvered).hide('fast');
-        rerender();
     }
     function etdOK() {
         var newTimeDuration,
