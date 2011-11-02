@@ -936,6 +936,9 @@
     function setButtonEnabled(button, enabled) {
         $(button).attr('disabled', !enabled);
     }
+    function getId(row, idx) {
+        return '#j' + row + '_' + idx;
+    }
     function removeSubject(target) {
         var rowidx,
             row,
@@ -1933,9 +1936,6 @@
                 _editSubject(brandNew, elementToEdit);
             }
         );
-    }
-    function getId(row, idx) {
-        return '#j' + row + '_' + idx;
     }
     function setSubjectBgColor(subject, color) {
         var subjectCssClassName = getSubjectCssClassName(subject);
