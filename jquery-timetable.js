@@ -742,6 +742,28 @@
             _shiftStartDayBackward();
         }
     }
+    function updatePrevNextButtonText(startDayName, prevDaySelected, nextDaySelected) {
+        var dayIndex = 0,
+            i;
+
+        while (days[dayIndex] !== startDayName) {
+            dayIndex++;
+        }
+        for (i = 0; i < 7; i ++) {
+            $('#t' + i).html(days[dayIndex]);
+            $('#b' + i).html(days[dayIndex]);
+            if (prevDaySelected === days[dayIndex]) {
+                setCompare(0, i, '#t' + i, 'dayBoxTop');
+            }
+            if (nextDaySelected === days[dayIndex]) {
+                setCompare(1, i, '#b' + i, 'dayBoxBottom');
+            }
+            dayIndex++;
+            if (dayIndex > 6) {
+                dayIndex = 0;
+            }
+        }
+    }
     function changeStartDay() {
         var newStartDay = $('#startDay').val(),
             shortDayName = newStartDay.substr(0, 2),
@@ -1149,28 +1171,6 @@
 
         setCompare(0, selected, '#t'+selected, 'dayBoxTop');
         setCompare(1, otherSelected, '#b'+otherSelected, 'dayBoxBottom');
-    }
-    function updatePrevNextButtonText(startDayName, prevDaySelected, nextDaySelected) {
-        var dayIndex = 0,
-            i;
-
-        while (days[dayIndex] !== startDayName) {
-            dayIndex++;
-        }
-        for (i = 0; i < 7; i ++) {
-            $('#t' + i).html(days[dayIndex]);
-            $('#b' + i).html(days[dayIndex]);
-            if (prevDaySelected === days[dayIndex]) {
-                setCompare(0, i, '#t' + i, 'dayBoxTop');
-            }
-            if (nextDaySelected === days[dayIndex]) {
-                setCompare(1, i, '#b' + i, 'dayBoxBottom');
-            }
-            dayIndex++;
-            if (dayIndex > 6) {
-                dayIndex = 0;
-            }
-        }
     }
     function _activateTodayCompare() {
         var date = new Date(),
