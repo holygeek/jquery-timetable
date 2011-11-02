@@ -1508,6 +1508,10 @@
         var relativeTo = currMouseOvered;
         _insertNewSlot(0, relativeTo);
     }
+    function insertRight(evt) {
+        var relativeTo = currMouseOvered;
+        _insertNewSlot(1, relativeTo);
+    }
     function _buildEditWidget(containerId) {
         var editWidget = $('<div>')
                             .addClass('editWidget')
@@ -1880,10 +1884,6 @@
             usehere = slotBookDict[bookname] || assumeUseAllBook;
             booklisttable.append(createBookListEntry(i, bookname, usehere));
         }
-    }
-    function insertRight(evt) {
-        var relativeTo = currMouseOvered;
-        _insertNewSlot(1, relativeTo);
     }
     function moveLeft(evt) {
         var slotToMove = currMouseOvered;
