@@ -254,6 +254,35 @@
         }
         return result;
     }
+    function addBookDiffEntry(subject, take, bookDiff) {
+        var bookname,
+            bookStatus,
+            booksOut = {},
+            booksIn = {},
+            hasBookOut = false,
+            hasBookIn = false;
+
+        for (bookname in bookDiff) {
+            if (bookDiff.hasOwnProperty(bookname)) {
+                bookStatus = bookDiff[bookname];
+                if (bookStatus === BOOK_DIFF_REMOVE) {
+                    booksOut[bookname] = true;
+                    hasBookOut = true;
+                } else if (bookStatus === BOOK_DIFF_ADD) {
+                    booksIn[bookname] = true;
+                    hasBookIn = true;
+                }
+            }
+        }
+        if (hasBookOut) {
+            take.out.text.push(_buildTakeInOutDiv(subject));
+            take.out.subjects.push({ s: subject.s, books: booksOut });
+        }
+        if (hasBookIn) {
+            take['in'].text.push(_buildTakeInOutDiv(subject));
+            take['in'].subjects.push( { s: subject.s, books: booksIn  });
+        }
+    }
     function showCompare(prev, next) {
         // FIXME camelCase
         var text,
@@ -1022,35 +1051,6 @@
     }
     function _shiftStartDayBackward() {
         settings.schedule.internal.push(settings.schedule.internal.shift());
-    }
-    function addBookDiffEntry(subject, take, bookDiff) {
-        var bookname,
-            bookStatus,
-            booksOut = {},
-            booksIn = {},
-            hasBookOut = false,
-            hasBookIn = false;
-
-        for (bookname in bookDiff) {
-            if (bookDiff.hasOwnProperty(bookname)) {
-                bookStatus = bookDiff[bookname];
-                if (bookStatus === BOOK_DIFF_REMOVE) {
-                    booksOut[bookname] = true;
-                    hasBookOut = true;
-                } else if (bookStatus === BOOK_DIFF_ADD) {
-                    booksIn[bookname] = true;
-                    hasBookIn = true;
-                }
-            }
-        }
-        if (hasBookOut) {
-            take.out.text.push(_buildTakeInOutDiv(subject));
-            take.out.subjects.push({ s: subject.s, books: booksOut });
-        }
-        if (hasBookIn) {
-            take['in'].text.push(_buildTakeInOutDiv(subject));
-            take['in'].subjects.push( { s: subject.s, books: booksIn  });
-        }
     }
     function updatePrevNextButtonText(startDayName, prevDaySelected, nextDaySelected) {
         var dayIndex = 0,
