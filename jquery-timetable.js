@@ -1194,6 +1194,9 @@
         $('#subjectBgColor').bind('change', updateSubjectBagroundColor);
         registerBindingForClearance('#subjectBgColor', 'change');
     }
+    function _setCompareNextDay(dayIdx, buttonEl) {
+        setCompare(1, dayIdx, buttonEl, 'dayBoxBottom');
+    }
     function _setCompare() {
         var id = $(this).attr('id'),
             dayIdx = parseInt(id.replace(/^[bt]/, ''), 10);
@@ -1945,9 +1948,6 @@
     }
     function _setComparePrevDay(dayIdx, buttonEl) {
         setCompare(0, dayIdx, buttonEl, 'dayBoxTop');
-    }
-    function _setCompareNextDay(dayIdx, buttonEl) {
-        setCompare(1, dayIdx, buttonEl, 'dayBoxBottom');
     }
     function overlayOff(above) {
         $('#overlay').hide();
