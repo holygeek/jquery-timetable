@@ -1810,6 +1810,20 @@
         }
         booklisttable.append.apply(booklisttable, headers);
     }
+    function updatePendingSlotBooksAction(evt) {
+        var checkbox,
+            bookname
+            ;
+
+        checkbox = getEventTarget(evt);
+        bookname = getBookNameFromCheckbox(checkbox);
+        if ($(checkbox).is(':checked')) {
+            setPendingSlotBooksAction(bookname, USE_HERE);
+        } else {
+            setPendingSlotBooksAction(bookname, DO_NOT_USE_HERE);
+        }
+        $('#addBookOk').show();
+    }
     function createBookListEntry(index, name, usehere) {
         var bookname = _td('bookName_' + index).html(name).attr('class', 'survivingBook'),
             checkboxInTd = _td()
@@ -2030,20 +2044,6 @@
     function overlayOff(above) {
         $('#overlay').hide();
         $(above).css('z-index', 0);
-    }
-    function updatePendingSlotBooksAction(evt) {
-        var checkbox,
-            bookname
-            ;
-
-        checkbox = getEventTarget(evt);
-        bookname = getBookNameFromCheckbox(checkbox);
-        if ($(checkbox).is(':checked')) {
-            setPendingSlotBooksAction(bookname, USE_HERE);
-        } else {
-            setPendingSlotBooksAction(bookname, DO_NOT_USE_HERE);
-        }
-        $('#addBookOk').show();
     }
     function getBookNameFromCheckbox(checkbox) {
         var checkboxId = $(checkbox).attr('id'),
