@@ -933,6 +933,45 @@
             $('#removeSlot').hide();
         }
     }
+    function esdKeyUp(e) {
+        var subject,
+            subjectBgColor;
+
+        // console.log('keycode: ' + e.keyCode);
+        // console.log('KEY_ESC: ' + KEY_ESC);
+        if (e.keyCode === KEY_ESC) {
+            // FIXME figure out why hitting ESC does not come here
+            if (onSubject) {
+                hideEditSubjectDialog();
+            } else if (onTime) {
+                hideEditTimeDialog();
+            }
+            return;
+        }
+        if (e.keyCode === KEY_ENTER) {
+            if (onSubject) {
+                esdOK();
+            } else if (onTime) {
+                etdOK();
+            }
+            return;
+        }
+        if (onSubject) {
+            subject = replaceUnsaveChars($('#newSubject').val());
+            if (subject.length === 0 || subject.match(/^ *$/)) {
+                $('#nobooks').attr("checked", true);
+                $(elementToEdit).html('');
+            } else {
+                $('#nobooks').attr("checked", false);
+                subjectBgColor = getSubjectBgColor({ s: subject });
+                $('#icp_subjectBgColor').css('background-color', subjectBgColor);
+                $(elementToEdit).css('background-color', subjectBgColor);
+                $('#subjectBgColor').val(subjectBgColor);
+                $(elementToEdit).html(replaceUnsaveChars(subject));
+            }
+            return;
+        }
+    }
     function enableEditMode() {
 
         var time = settings.schedule.time,
@@ -1001,45 +1040,6 @@
 
         $('.' + klass).css('background-color', $(this).val());
         $(elementToEdit).css('background-color', $(this).val());
-    }
-    function esdKeyUp(e) {
-        var subject,
-            subjectBgColor;
-
-        // console.log('keycode: ' + e.keyCode);
-        // console.log('KEY_ESC: ' + KEY_ESC);
-        if (e.keyCode === KEY_ESC) {
-            // FIXME figure out why hitting ESC does not come here
-            if (onSubject) {
-                hideEditSubjectDialog();
-            } else if (onTime) {
-                hideEditTimeDialog();
-            }
-            return;
-        }
-        if (e.keyCode === KEY_ENTER) {
-            if (onSubject) {
-                esdOK();
-            } else if (onTime) {
-                etdOK();
-            }
-            return;
-        }
-        if (onSubject) {
-            subject = replaceUnsaveChars($('#newSubject').val());
-            if (subject.length === 0 || subject.match(/^ *$/)) {
-                $('#nobooks').attr("checked", true);
-                $(elementToEdit).html('');
-            } else {
-                $('#nobooks').attr("checked", false);
-                subjectBgColor = getSubjectBgColor({ s: subject });
-                $('#icp_subjectBgColor').css('background-color', subjectBgColor);
-                $(elementToEdit).css('background-color', subjectBgColor);
-                $('#subjectBgColor').val(subjectBgColor);
-                $(elementToEdit).html(replaceUnsaveChars(subject));
-            }
-            return;
-        }
     }
     function animateSlotSize(e) {
         var text,
