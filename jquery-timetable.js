@@ -1252,6 +1252,9 @@
             $(el).removeClass('selected');
         }
     }
+    function moveToNextDay() {
+        _moveBackOrForward('forward');
+    }
     function _buildPrevNextButtons(containerId) {
         var prevButton = _button('prevButton').html('&lt;').attr('title', 'Move back one day'),
             nextButton = _button('nextButton').html('&gt;').attr('title', 'Move forward one day'),
@@ -1330,9 +1333,6 @@
     }
     function moveToPrevDay() {
         _moveBackOrForward('back');
-    }
-    function moveToNextDay() {
-        _moveBackOrForward('forward');
     }
     function _moveBackOrForward(direction) {
         var backward = (direction === 'back'),
