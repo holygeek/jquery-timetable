@@ -170,6 +170,19 @@
     function _intValue(str) {
         return parseInt(str, 10);
     }
+    function rerender(opts) {
+        var entry;
+        if (opts) {
+            for (entry in opts) {
+                if (opts.hasOwnProperty(entry)) {
+                    settings[entry] = opts[entry];
+                }
+            }
+        }
+        $('#editSubjectDialog').hide();
+        renderedAt.timetable('render', false);
+        showCompare(settings.schedule.internal[currCompare.prev], settings.schedule.internal[currCompare.next]);
+    }
     function updateStartTime(hour_or_minute) {
             var newValue,
                 time = settings.schedule.time;
@@ -834,19 +847,6 @@
     }
     function _shiftStartDayBackward() {
         settings.schedule.internal.push(settings.schedule.internal.shift());
-    }
-    function rerender(opts) {
-        var entry;
-        if (opts) {
-            for (entry in opts) {
-                if (opts.hasOwnProperty(entry)) {
-                    settings[entry] = opts[entry];
-                }
-            }
-        }
-        $('#editSubjectDialog').hide();
-        renderedAt.timetable('render', false);
-        showCompare(settings.schedule.internal[currCompare.prev], settings.schedule.internal[currCompare.next]);
     }
     function getNeededBooks(subject, list_of_subject) {
         var i,
