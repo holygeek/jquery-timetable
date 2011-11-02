@@ -179,6 +179,27 @@
         }
         return false;
     }
+    function hasBook(subject) {
+        var bookname;
+        // FIXME definition of hasbook:
+        // 1. .nobook flag is not set AND
+        // 2. subject.books exist AND
+        // 2. books dict has at least one true entry
+        if (typeof(subject.nobook) === 'undefined' || subject.nobook === false) {
+            if (!subject.books) {
+                // Book list is not specified, assume that it has books anyway
+                return true;
+            }
+            for (bookname in subject.books) {
+                if (subject.books.hasOwnProperty(bookname)) {
+                    if (subject.books[bookname]) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return ! subject.nobook;
+    }
     function showCompare(prev, next) {
         // FIXME camelCase
         var text,
@@ -1870,27 +1891,6 @@
                 _editSubject(brandNew, elementToEdit);
             }
         );
-    }
-    function hasBook(subject) {
-        var bookname;
-        // FIXME definition of hasbook:
-        // 1. .nobook flag is not set AND
-        // 2. subject.books exist AND
-        // 2. books dict has at least one true entry
-        if (typeof(subject.nobook) === 'undefined' || subject.nobook === false) {
-            if (!subject.books) {
-                // Book list is not specified, assume that it has books anyway
-                return true;
-            }
-            for (bookname in subject.books) {
-                if (subject.books.hasOwnProperty(bookname)) {
-                    if (subject.books[bookname]) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return ! subject.nobook;
     }
     function getId(row, idx) {
         return '#j' + row + '_' + idx;
