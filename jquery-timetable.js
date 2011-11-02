@@ -1825,6 +1825,12 @@
         }
         return target;
     }
+    function getBookNameFromCheckbox(checkbox) {
+        var checkboxId = $(checkbox).attr('id'),
+            bookRowIdx = checkboxId.split('_')[1],
+            bookname = getBookNameFromRowIndex(bookRowIdx);
+        return bookname;
+    }
     function updatePendingSlotBooksAction(evt) {
         var checkbox,
             bookname
@@ -2059,12 +2065,6 @@
     function overlayOff(above) {
         $('#overlay').hide();
         $(above).css('z-index', 0);
-    }
-    function getBookNameFromCheckbox(checkbox) {
-        var checkboxId = $(checkbox).attr('id'),
-            bookRowIdx = checkboxId.split('_')[1],
-            bookname = getBookNameFromRowIndex(bookRowIdx);
-        return bookname;
     }
     function setPendingSlotBooksAction(bookname, use_or_not) {
         pendingSlotBooksAction[bookname] = use_or_not;
