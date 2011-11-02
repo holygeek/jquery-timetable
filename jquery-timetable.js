@@ -1197,6 +1197,9 @@
     function _setCompareNextDay(dayIdx, buttonEl) {
         setCompare(1, dayIdx, buttonEl, 'dayBoxBottom');
     }
+    function _setComparePrevDay(dayIdx, buttonEl) {
+        setCompare(0, dayIdx, buttonEl, 'dayBoxTop');
+    }
     function _setCompare() {
         var id = $(this).attr('id'),
             dayIdx = parseInt(id.replace(/^[bt]/, ''), 10);
@@ -1945,9 +1948,6 @@
                 _editSubject(brandNew, elementToEdit);
             }
         );
-    }
-    function _setComparePrevDay(dayIdx, buttonEl) {
-        setCompare(0, dayIdx, buttonEl, 'dayBoxTop');
     }
     function overlayOff(above) {
         $('#overlay').hide();
