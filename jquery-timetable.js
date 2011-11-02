@@ -1009,6 +1009,12 @@
                   .replace(/"/g, '&quot;')
                   ;
     }
+    function setSubjectBgColor(subject, color) {
+        var subjectCssClassName = getSubjectCssClassName(subject);
+        if (subjectCssClassName.length > 0) {
+            settings.schedule.bgColor[subjectCssClassName] = color;
+        }
+    }
     function esdOK() {
         var i,
             dayRow,
@@ -1936,12 +1942,6 @@
                 _editSubject(brandNew, elementToEdit);
             }
         );
-    }
-    function setSubjectBgColor(subject, color) {
-        var subjectCssClassName = getSubjectCssClassName(subject);
-        if (subjectCssClassName.length > 0) {
-            settings.schedule.bgColor[subjectCssClassName] = color;
-        }
     }
     function _setComparePrevDay(dayIdx, buttonEl) {
         setCompare(0, dayIdx, buttonEl, 'dayBoxTop');
