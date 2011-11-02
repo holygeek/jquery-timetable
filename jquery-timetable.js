@@ -1245,6 +1245,13 @@
         </div>*/
         $('#' + parentContainer).append(compareContainer);
     }
+    function _setSelected(el, isSelected) {
+        if (isSelected) {
+            $(el).addClass('selected');
+        } else {
+            $(el).removeClass('selected');
+        }
+    }
     function _buildPrevNextButtons(containerId) {
         var prevButton = _button('prevButton').html('&lt;').attr('title', 'Move back one day'),
             nextButton = _button('nextButton').html('&gt;').attr('title', 'Move forward one day'),
@@ -2081,13 +2088,6 @@
     function _swapTwoArrayElements(array, a, b) {
         var move = array.splice(a, 1);
         array.splice(b, 0, move[0]);
-    }
-    function _setSelected(el, isSelected) {
-        if (isSelected) {
-            $(el).addClass('selected');
-        } else {
-            $(el).removeClass('selected');
-        }
     }
     function _removeDictEntriesExcept(keysWanted, dict) {
         var entry;
