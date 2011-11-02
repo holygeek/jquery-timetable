@@ -1465,6 +1465,14 @@
             return _editTime(elementToEdit);
         }
     }
+    function _insertNewSlot (offset, relativeTo) {
+        thisIsANewSlot = 1;
+        if (onSubject) {
+            return _insertNewSubjectSlot(offset, relativeTo);
+        } else if (onTime) {
+            return _insertNewTimeSlot(offset, null, relativeTo);
+        }
+    }
     function insertLeft(evt) {
         var relativeTo = currMouseOvered;
         _insertNewSlot(0, relativeTo);
@@ -1845,14 +1853,6 @@
     function insertRight(evt) {
         var relativeTo = currMouseOvered;
         _insertNewSlot(1, relativeTo);
-    }
-    function _insertNewSlot (offset, relativeTo) {
-        thisIsANewSlot = 1;
-        if (onSubject) {
-            return _insertNewSubjectSlot(offset, relativeTo);
-        } else if (onTime) {
-            return _insertNewTimeSlot(offset, null, relativeTo);
-        }
     }
     function moveLeft(evt) {
         var slotToMove = currMouseOvered;
