@@ -1245,6 +1245,35 @@
         </div>*/
         $('#' + parentContainer).append(compareContainer);
     }
+    function _buildPrevNextButtons(containerId) {
+        var prevButton = _button('prevButton').html('&lt;').attr('title', 'Move back one day'),
+            nextButton = _button('nextButton').html('&gt;').attr('title', 'Move forward one day'),
+            prevNextButtonsContainer = _div('prevNextButtonsContainer'),
+            listOfButtonId = [ '#nextButton', '#prevButton' ],
+            events = [ 'mousedown', 'mouseup', 'click' ],
+            buttonId,
+            i,
+            j;
+
+        prevNextButtonsContainer.append(prevButton, nextButton);
+        /*
+        <button id="prevButton">-</button>
+        <button id="nextButton">+</button>*/
+        $('#' + containerId).append(prevNextButtonsContainer);
+
+        for(i = 0; i < listOfButtonId.length; i++) {
+            buttonId = listOfButtonId[i];
+            for(j = 0; j < events.length; j++) {
+                $(buttonId).unbind(events[i]);
+            }
+        }
+        $('#nextButton').mousedown(function() { _setSelected(this, true); });
+        $('#prevButton').mousedown(function() { _setSelected(this, true); });
+        $('#nextButton').mouseup(function() { _setSelected(this, false); });
+        $('#prevButton').mouseup(function() { _setSelected(this, false); });
+        $('#nextButton').click(moveToNextDay);
+        $('#prevButton').click(moveToPrevDay);
+    }
     function _buildCompareWidget(containerId) {
         var id = 'compareContainer';
         $(containerId).append(_div(id));
@@ -1291,35 +1320,6 @@
         inOutContainer.append(takeInDiv, arrow1, schoolBagContainer, arrow2, takeOutDiv);
 
         $(containerId).append(inOutContainer);
-    }
-    function _buildPrevNextButtons(containerId) {
-        var prevButton = _button('prevButton').html('&lt;').attr('title', 'Move back one day'),
-            nextButton = _button('nextButton').html('&gt;').attr('title', 'Move forward one day'),
-            prevNextButtonsContainer = _div('prevNextButtonsContainer'),
-            listOfButtonId = [ '#nextButton', '#prevButton' ],
-            events = [ 'mousedown', 'mouseup', 'click' ],
-            buttonId,
-            i,
-            j;
-
-        prevNextButtonsContainer.append(prevButton, nextButton);
-        /*
-        <button id="prevButton">-</button>
-        <button id="nextButton">+</button>*/
-        $('#' + containerId).append(prevNextButtonsContainer);
-
-        for(i = 0; i < listOfButtonId.length; i++) {
-            buttonId = listOfButtonId[i];
-            for(j = 0; j < events.length; j++) {
-                $(buttonId).unbind(events[i]);
-            }
-        }
-        $('#nextButton').mousedown(function() { _setSelected(this, true); });
-        $('#prevButton').mousedown(function() { _setSelected(this, true); });
-        $('#nextButton').mouseup(function() { _setSelected(this, false); });
-        $('#prevButton').mouseup(function() { _setSelected(this, false); });
-        $('#nextButton').click(moveToNextDay);
-        $('#prevButton').click(moveToPrevDay);
     }
     function moveToPrevDay() {
         _moveBackOrForward('back');
