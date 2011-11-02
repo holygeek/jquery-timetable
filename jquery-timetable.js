@@ -96,9 +96,9 @@
     function putAbsBottomOf(ref, box) {
         var offset,
             width,
-            ref = $('#'+ref),
-            offset = ref.offset(),
-            height = ref.outerHeight()
+            refEl = $('#'+ref),
+            offset = refEl.offset(),
+            height = refEl.outerHeight()
         ;
         $('#'+box).css({
             left: offset.left + 'px',
