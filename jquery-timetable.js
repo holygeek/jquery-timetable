@@ -1551,6 +1551,18 @@
         rerender();
         hideEdit();
     }
+    function _moveSubjectRight(slotToMove) {
+        var i = getSelectedIndex(slotToMove),
+            row = settings.schedule.internal[i.row],
+            idx = i.idx
+        ;
+        if (idx >= row.length - 1) {
+            return;
+        }
+        _swapTwoArrayElements(row, i.idx, i.idx + 1);
+        rerender();
+        hideEdit();
+    }
     function moveRight(evt) {
         var slotToMove = currMouseOvered;
         if (onTime) {
@@ -1931,18 +1943,6 @@
             usehere = slotBookDict[bookname] || assumeUseAllBook;
             booklisttable.append(createBookListEntry(i, bookname, usehere));
         }
-    }
-    function _moveSubjectRight(slotToMove) {
-        var i = getSelectedIndex(slotToMove),
-            row = settings.schedule.internal[i.row],
-            idx = i.idx
-        ;
-        if (idx >= row.length - 1) {
-            return;
-        }
-        _swapTwoArrayElements(row, i.idx, i.idx + 1);
-        rerender();
-        hideEdit();
     }
     function askForBooks() {
         var whenshown;
