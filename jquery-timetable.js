@@ -843,6 +843,20 @@
             hideEdit();
         }
     }
+    function _getSelectedSubjectIndex(el) {
+        var rowidx = $(el).attr('id').substr(1).split('_');
+        return {
+            row : parseInt(rowidx[0], 10),
+            idx : parseInt(rowidx[1], 10)
+        };
+    }
+    function getSelectedIndex(el) {
+        if (onSubject) {
+            return _getSelectedSubjectIndex(el||currMouseOvered);
+        } else if (onTime) {
+            return _getSelectedTimeIndex(el||currMouseOvered);
+        }
+    }
     function showEdit() {
         var time,
             x,
@@ -1204,23 +1218,9 @@
         setCompare(0, day, '#t'+day, 'dayBoxTop');
         setCompare(1, nextDay, '#b'+nextDay, 'dayBoxBottom');
     }
-    function getSelectedIndex(el) {
-        if (onSubject) {
-            return _getSelectedSubjectIndex(el||currMouseOvered);
-        } else if (onTime) {
-            return _getSelectedTimeIndex(el||currMouseOvered);
-        }
-    }
     function _getSelectedTimeIndex(el) {
         var timeIdx = $(el).attr('id').replace('time', '');
         return { idx : parseInt(timeIdx, 10) };
-    }
-    function _getSelectedSubjectIndex(el) {
-        var rowidx = $(el).attr('id').substr(1).split('_');
-        return {
-            row : parseInt(rowidx[0], 10),
-            idx : parseInt(rowidx[1], 10)
-        };
     }
     function hideEditTimeDialog() {
         setButtonEnabled('#addduration', true);
