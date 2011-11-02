@@ -167,6 +167,9 @@
         settings.eventBindings[eventName][idOrClass] = 1;
     }
 
+    function _intValue(str) {
+        return parseInt(str, 10);
+    }
     function updateStartTime(hour_or_minute) {
             var newValue,
                 time = settings.schedule.time;
@@ -1912,9 +1915,6 @@
         }
         _clearHighlight(klass);
         _highlight(clicked);
-    }
-    function _intValue(str) {
-        return parseInt(str, 10);
     }
     function _clearHighlight(klass) {
         $('.'+klass).removeClass('selected');
