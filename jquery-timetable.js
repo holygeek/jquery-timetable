@@ -1261,6 +1261,13 @@
         }
         return dateDayIndex;
     }
+    function _incrementDay(day) {
+        day = day + 1;
+        if (day > _Sunday) {
+            day = _Monday;
+        }
+        return day;
+    }
     function _moveBackOrForward(direction) {
         var backward = (direction === 'back'),
             selected = -1,
@@ -2075,13 +2082,6 @@
         day = day - 1;
         if (day < _Monday) {
             day = _Sunday;
-        }
-        return day;
-    }
-    function _incrementDay(day) {
-        day = day + 1;
-        if (day > _Sunday) {
-            day = _Monday;
         }
         return day;
     }
