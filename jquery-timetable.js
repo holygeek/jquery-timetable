@@ -818,6 +818,28 @@
             }
         }
     }
+    function _maybeHideEdit(e) {
+        var relTarg,
+            hide;
+
+        if (!e) {
+            e = window.event;
+        }
+        relTarg = e.relatedTarget || e.toElement;
+        hide = true;
+        if ($(relTarg).hasClass('.subjectslot')) {
+            hide = false;
+        }
+        if($(relTarg).attr('id') === 'editOption') {
+            hide = false;
+        }
+        if ($(relTarg).parent().attr('id') === 'editOption') {
+            hide = false;
+        }
+        if (hide) {
+            hideEdit();
+        }
+    }
     function enableEditMode() {
 
         var time = settings.schedule.time,
@@ -886,28 +908,6 @@
 
         $('.' + klass).css('background-color', $(this).val());
         $(elementToEdit).css('background-color', $(this).val());
-    }
-    function _maybeHideEdit(e) {
-        var relTarg,
-            hide;
-
-        if (!e) {
-            e = window.event;
-        }
-        relTarg = e.relatedTarget || e.toElement;
-        hide = true;
-        if ($(relTarg).hasClass('.subjectslot')) {
-            hide = false;
-        }
-        if($(relTarg).attr('id') === 'editOption') {
-            hide = false;
-        }
-        if ($(relTarg).parent().attr('id') === 'editOption') {
-            hide = false;
-        }
-        if (hide) {
-            hideEdit();
-        }
     }
     function showEdit() {
         var time,
