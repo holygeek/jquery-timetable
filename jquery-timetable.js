@@ -628,6 +628,16 @@
         }
         return mostFrequentDurationHere;
     }
+    function durationToSize(duration, noScale) {
+        var size;
+        if (noScale) {
+            size = duration;
+        } else {
+            size = Math.round(duration * settings.schedule.pixel_per_minute);
+        }
+        /* Minus the two 1px left and right borders */
+        return size - 2;
+    }
     function renderTime(time, html) {
         var hour = time.start.hour,
             minute = time.start.minute,
@@ -674,16 +684,6 @@
         }
         html.push(_clearDiv);
         return totalWidth;
-    }
-    function durationToSize(duration, noScale) {
-        var size;
-        if (noScale) {
-            size = duration;
-        } else {
-            size = Math.round(duration * settings.schedule.pixel_per_minute);
-        }
-        /* Minus the two 1px left and right borders */
-        return size - 2;
     }
     function renderSlot(slot, funargs, idx) {
         var html = funargs.html,
