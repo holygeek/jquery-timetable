@@ -318,6 +318,14 @@
             take['in'].subjects.push( { s: subject.s, books: booksIn  });
         }
     }
+    function _getFulldayName(shortName) {
+        var i;
+        for (i = 0; i < days.length; i++) {
+            if (shortName === days[i].substr(0, 2)) {
+                return days[i];
+            }
+        }
+    }
     function showCompare(prev, next) {
         // FIXME camelCase
         var text,
@@ -848,14 +856,6 @@
         }
         if (onTime && settings.schedule.time.durations.length === 1) {
             $('#removeSlot').hide();
-        }
-    }
-    function _getFulldayName(shortName) {
-        var i;
-        for (i = 0; i < days.length; i++) {
-            if (shortName === days[i].substr(0, 2)) {
-                return days[i];
-            }
         }
     }
     function _getFirstDay() {
