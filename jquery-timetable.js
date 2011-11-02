@@ -734,6 +734,9 @@
     function _getFirstDay() {
         return settings.schedule.internal[0][0].s;
     }
+    function _shiftStartDayBackward() {
+        settings.schedule.internal.push(settings.schedule.internal.shift());
+    }
     function shiftUntil(shortDayName) {
         while (shortDayName !== _getFirstDay()) {
             _shiftStartDayBackward();
@@ -1146,9 +1149,6 @@
 
         setCompare(0, selected, '#t'+selected, 'dayBoxTop');
         setCompare(1, otherSelected, '#b'+otherSelected, 'dayBoxBottom');
-    }
-    function _shiftStartDayBackward() {
-        settings.schedule.internal.push(settings.schedule.internal.shift());
     }
     function updatePrevNextButtonText(startDayName, prevDaySelected, nextDaySelected) {
         var dayIndex = 0,
