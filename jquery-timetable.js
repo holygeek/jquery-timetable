@@ -1002,6 +1002,13 @@
         editDialogIsVisible = 0;
         $('#editTimeDialog').hide('fast', function() { rerender(); });
     }
+    function replaceUnsaveChars(str) {
+        // TODO use jqencoder - http://software.digital-ritual.net/jqencoder/
+        return str.replace(/</g, '&lt;')
+                  .replace(/>/g, '&gt;')
+                  .replace(/"/g, '&quot;')
+                  ;
+    }
     function esdOK() {
         var i,
             dayRow,
@@ -1870,13 +1877,6 @@
             $('#bookname').focus().select();
         };
         $('#addBookDialog').show('fast', whenshown);
-    }
-    function replaceUnsaveChars(str) {
-        // TODO use jqencoder - http://software.digital-ritual.net/jqencoder/
-        return str.replace(/</g, '&lt;')
-                  .replace(/>/g, '&gt;')
-                  .replace(/"/g, '&quot;')
-                  ;
     }
     function addBookInView(evt) {
         var name,
