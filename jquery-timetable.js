@@ -933,6 +933,18 @@
             $('#removeSlot').hide();
         }
     }
+    function hideEditSubjectDialog(evt, fromOKButton) {
+        var doAfterHideDialog;
+        setButtonEnabled('#addduration', true);
+        editDialogIsVisible = 0;
+        doAfterHideDialog = function() {
+            if (thisIsANewSlot && fromOKButton !== 'yes') {
+                removeSlot(null, elementToEdit);
+            }
+            rerender();
+        };
+        $('#editSubjectDialog').hide('fast', doAfterHideDialog);
+    }
     function esdKeyUp(e) {
         var subject,
             subjectBgColor;
@@ -1226,18 +1238,6 @@
         setButtonEnabled('#addduration', true);
         editDialogIsVisible = 0;
         $('#editTimeDialog').hide('fast', function() { rerender(); });
-    }
-    function hideEditSubjectDialog(evt, fromOKButton) {
-        var doAfterHideDialog;
-        setButtonEnabled('#addduration', true);
-        editDialogIsVisible = 0;
-        doAfterHideDialog = function() {
-            if (thisIsANewSlot && fromOKButton !== 'yes') {
-                removeSlot(null, elementToEdit);
-            }
-            rerender();
-        };
-        $('#editSubjectDialog').hide('fast', doAfterHideDialog);
     }
     function _buildOverlay(containerId) {
         var overlay = _div('overlay').css({
