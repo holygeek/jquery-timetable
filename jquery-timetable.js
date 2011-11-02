@@ -1512,6 +1512,10 @@
         var relativeTo = currMouseOvered;
         _insertNewSlot(1, relativeTo);
     }
+    function _swapTwoArrayElements(array, a, b) {
+        var move = array.splice(a, 1);
+        array.splice(b, 0, move[0]);
+    }
     function _moveTimeLeft(slotToMove) {
         var i = getSelectedIndex(slotToMove);
         if (i.idx <= 1) {
@@ -2084,10 +2088,6 @@
             target = target.parentNode;
         }
         return target;
-    }
-    function _swapTwoArrayElements(array, a, b) {
-        var move = array.splice(a, 1);
-        array.splice(b, 0, move[0]);
     }
     function _removeDictEntriesExcept(keysWanted, dict) {
         var entry;
