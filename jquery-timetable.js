@@ -1908,52 +1908,6 @@
         dirtyBookList = $('#booklistheader').html();
         $('#addBookOk').fadeIn();
     }
-    function _buildAddBookDialog(containerId) {
-        var addBookDialog,
-            booklistc,
-            booknameInput,
-            addButton,
-            okButton,
-            cancelButton
-        ;
-
-        addBookDialog = _div('addBookDialog').attr('class', 'dialog');
-
-        // addBookDialog.append(_a('closeAddBookDialog').html('close').css({
-        //     display: 'block',
-        //     float: 'right'
-        // }).attr({
-        //     href: 'javascript:;'
-        // }).click(hideAddBookDialog));
-
-        booklistc = _div('booklistc');
-        booklistc.append(_div('booklistheader'));
-        booklistc.append(_table('booklist'));
-        addBookDialog.append(booklistc);
-
-        booknameInput = _input('bookname').attr({
-            type: 'text',
-            placeHolder: 'Book name',
-            size: 60,
-            maxlength: 100
-        });
-        addButton = _button('addbook').html('Add').click(addBookInView);
-        addBookDialog.append(booknameInput, addButton);
-
-        okButton = _button('addBookOk')
-                            .html('OK')
-                            .click(updateBookList).hide();
-        cancelButton = _button('addBookCancel')
-                            .html('Cancel')
-                            .click(hideAddBookDialog);
-        addBookDialog.append(_div().attr('class','clear'));
-        addBookDialog.append(_div('bookButtonsC')
-                                .append(cancelButton, okButton)
-        );
-
-        addBookDialog.bind('renderbooklist', renderBookList);
-        $(containerId).append(addBookDialog);
-    }
     function updateBookList() {
         var subject,
             cssClass,
@@ -2023,6 +1977,52 @@
         updateSlotUseHereStatus();
 
         hideAddBookDialog();
+    }
+    function _buildAddBookDialog(containerId) {
+        var addBookDialog,
+            booklistc,
+            booknameInput,
+            addButton,
+            okButton,
+            cancelButton
+        ;
+
+        addBookDialog = _div('addBookDialog').attr('class', 'dialog');
+
+        // addBookDialog.append(_a('closeAddBookDialog').html('close').css({
+        //     display: 'block',
+        //     float: 'right'
+        // }).attr({
+        //     href: 'javascript:;'
+        // }).click(hideAddBookDialog));
+
+        booklistc = _div('booklistc');
+        booklistc.append(_div('booklistheader'));
+        booklistc.append(_table('booklist'));
+        addBookDialog.append(booklistc);
+
+        booknameInput = _input('bookname').attr({
+            type: 'text',
+            placeHolder: 'Book name',
+            size: 60,
+            maxlength: 100
+        });
+        addButton = _button('addbook').html('Add').click(addBookInView);
+        addBookDialog.append(booknameInput, addButton);
+
+        okButton = _button('addBookOk')
+                            .html('OK')
+                            .click(updateBookList).hide();
+        cancelButton = _button('addBookCancel')
+                            .html('Cancel')
+                            .click(hideAddBookDialog);
+        addBookDialog.append(_div().attr('class','clear'));
+        addBookDialog.append(_div('bookButtonsC')
+                                .append(cancelButton, okButton)
+        );
+
+        addBookDialog.bind('renderbooklist', renderBookList);
+        $(containerId).append(addBookDialog);
     }
     function updateSlotUseHereStatus() {
         // FIXME refactor these three or four lines into a function, we see
