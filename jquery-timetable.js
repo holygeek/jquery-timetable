@@ -742,6 +742,15 @@
             _shiftStartDayBackward();
         }
     }
+    function setCompare(row, day, clicked, klass) {
+        clickedDays[row] = day;
+        if (hasTwoDaysSelected()) {
+            currCompare = { prev: clickedDays[0], next: clickedDays[1] };
+            showCompare(settings.schedule.internal[clickedDays[0]], settings.schedule.internal[clickedDays[1]]);
+        }
+        _clearHighlight(klass);
+        _highlight(clicked);
+    }
     function updatePrevNextButtonText(startDayName, prevDaySelected, nextDaySelected) {
         var dayIndex = 0,
             i;
@@ -1930,15 +1939,6 @@
     }
     function _setCompareNextDay(dayIdx, buttonEl) {
         setCompare(1, dayIdx, buttonEl, 'dayBoxBottom');
-    }
-    function setCompare(row, day, clicked, klass) {
-        clickedDays[row] = day;
-        if (hasTwoDaysSelected()) {
-            currCompare = { prev: clickedDays[0], next: clickedDays[1] };
-            showCompare(settings.schedule.internal[clickedDays[0]], settings.schedule.internal[clickedDays[1]]);
-        }
-        _clearHighlight(klass);
-        _highlight(clicked);
     }
     function _clearHighlight(klass) {
         $('.'+klass).removeClass('selected');
