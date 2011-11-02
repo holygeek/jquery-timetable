@@ -1412,6 +1412,33 @@
         });
         $(containerId).append(overlay);
     }
+    function _editSubject(brandNew, target) {
+        var editSubjectDialog = $('#editSubjectDialog'),
+            slotId = $(target).attr('id'),
+            height = outerHeight(slotId),
+            i,
+            slot,
+            currBackground
+        ;
+        editSubjectDialog.css('left', x(slotId) + halfWidth(slotId) - halfWidth('editSubjectDialog'));
+        editSubjectDialog.css('top', y(slotId) + height);
+        i = getSelectedIndex(target);
+        slot = settings.schedule.internal[i.row][i.idx];
+        $('#newSubject').val(slot.s);
+        $('#newDuration').val(slot.d);
+        $('#nobooks').attr('checked', slot.nobook || false);
+        currBackground = $(target).css('background-color');
+        if (brandNew) {
+            currBackground = getSubjectBgColor(slot);
+        }
+        // $('#subjectBgColor').attr('value', currBackground);
+        $('#icp_subjectBgColor').css('background-color', currBackground);
+        $('#subjectBgColor').val(currBackground);
+        hideEdit();
+        editDialogIsVisible = 1;
+        editSubjectDialog.show('fast');
+        $('#newSubject').focus().select();
+    }
     function editSlot(evt) {
         thisIsANewSlot = 0;
         elementToEdit = currMouseOvered;
@@ -1881,33 +1908,6 @@
         hideEdit();
         editTimeDialog.show('fast');
         $('#newTimeDuration').focus().select();
-    }
-    function _editSubject(brandNew, target) {
-        var editSubjectDialog = $('#editSubjectDialog'),
-            slotId = $(target).attr('id'),
-            height = outerHeight(slotId),
-            i,
-            slot,
-            currBackground
-        ;
-        editSubjectDialog.css('left', x(slotId) + halfWidth(slotId) - halfWidth('editSubjectDialog'));
-        editSubjectDialog.css('top', y(slotId) + height);
-        i = getSelectedIndex(target);
-        slot = settings.schedule.internal[i.row][i.idx];
-        $('#newSubject').val(slot.s);
-        $('#newDuration').val(slot.d);
-        $('#nobooks').attr('checked', slot.nobook || false);
-        currBackground = $(target).css('background-color');
-        if (brandNew) {
-            currBackground = getSubjectBgColor(slot);
-        }
-        // $('#subjectBgColor').attr('value', currBackground);
-        $('#icp_subjectBgColor').css('background-color', currBackground);
-        $('#subjectBgColor').val(currBackground);
-        hideEdit();
-        editDialogIsVisible = 1;
-        editSubjectDialog.show('fast');
-        $('#newSubject').focus().select();
     }
     function askForBooks() {
         var whenshown;
