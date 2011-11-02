@@ -254,6 +254,27 @@
         }
         return result;
     }
+    function _buildTakeInOutDiv(subject, extraclass) {
+        var subjectname = subject.s;
+        extraclass = extraclass || '';
+        if (!subject || subjectname.match(/^ *$/)) {
+            subjectname = '&nbsp;&nbsp;&nbsp;';
+        }
+        return [
+            '<div class="',
+            getSubjectCssClassName(subject),
+            ' boxee ',
+            extraclass,
+            '"',
+            'style="',
+            'background-color: ',
+            getSubjectBgColor(subject),
+            ';"',
+            '>',
+            subjectname,
+            '</div>'
+        ].join('');
+    }
     function addBookDiffEntry(subject, take, bookDiff) {
         var bookname,
             bookStatus,
@@ -2027,27 +2048,6 @@
             target = target.parentNode;
         }
         return target;
-    }
-    function _buildTakeInOutDiv(subject, extraclass) {
-        var subjectname = subject.s;
-        extraclass = extraclass || '';
-        if (!subject || subjectname.match(/^ *$/)) {
-            subjectname = '&nbsp;&nbsp;&nbsp;';
-        }
-        return [
-            '<div class="',
-            getSubjectCssClassName(subject),
-            ' boxee ',
-            extraclass,
-            '"',
-            'style="',
-            'background-color: ',
-            getSubjectBgColor(subject),
-            ';"',
-            '>',
-            subjectname,
-            '</div>'
-        ].join('');
     }
     function emptyTd() {
         return _td().html('&nbsp;');
