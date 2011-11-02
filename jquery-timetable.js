@@ -1484,6 +1484,18 @@
             }
         );
     }
+    function _insertNewTimeSlot(offset, defaultDuration, relativeTo) {
+        var i = getSelectedIndex(relativeTo),
+            idx = i.idx + offset,
+            id
+        ;
+        settings.schedule.time.durations.splice(idx, 0, defaultDuration || mostFrequentDuration);
+        hideEdit();
+        rerender();
+        id = 'time' + idx;
+        $(id).css('display', 'none');
+        $(id).show();
+    }
     function _insertNewSlot (offset, relativeTo) {
         thisIsANewSlot = 1;
         if (onSubject) {
@@ -1966,18 +1978,6 @@
         $('#addBookDialog').hide();
         overlayOff('#addBookDialog');
         $('#addBookOk').hide();
-    }
-    function _insertNewTimeSlot(offset, defaultDuration, relativeTo) {
-        var i = getSelectedIndex(relativeTo),
-            idx = i.idx + offset,
-            id
-        ;
-        settings.schedule.time.durations.splice(idx, 0, defaultDuration || mostFrequentDuration);
-        hideEdit();
-        rerender();
-        id = 'time' + idx;
-        $(id).css('display', 'none');
-        $(id).show();
     }
     function overlayOff(above) {
         $('#overlay').hide();
