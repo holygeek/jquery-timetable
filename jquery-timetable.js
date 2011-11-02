@@ -170,6 +170,15 @@
     function _intValue(str) {
         return parseInt(str, 10);
     }
+    function slotExists(subject, slots) {
+        var i;
+        for(i = 0; i < slots.length; i++) {
+            if (slots[i].s === subject) {
+                return true;
+            }
+        }
+        return false;
+    }
     function showCompare(prev, next) {
         // FIXME camelCase
         var text,
@@ -1861,15 +1870,6 @@
                 _editSubject(brandNew, elementToEdit);
             }
         );
-    }
-    function slotExists(subject, slots) {
-        var i;
-        for(i = 0; i < slots.length; i++) {
-            if (slots[i].s === subject) {
-                return true;
-            }
-        }
-        return false;
     }
     function hasBook(subject) {
         var bookname;
