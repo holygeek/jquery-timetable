@@ -1252,6 +1252,15 @@
             $(el).removeClass('selected');
         }
     }
+    function getDayIndex(dateDayIndex) {
+        // Javascript treats Sunday as the first day of the week (index 0)
+        // We treat Monday as the first day fo the week (index 0).
+        dateDayIndex = dateDayIndex -1;
+        if (dateDayIndex < 0) {
+            dateDayIndex = 6;
+        }
+        return dateDayIndex;
+    }
     function _moveBackOrForward(direction) {
         var backward = (direction === 'back'),
             selected = -1,
@@ -2061,15 +2070,6 @@
             target = target.parentNode;
         }
         return target;
-    }
-    function getDayIndex(dateDayIndex) {
-        // Javascript treats Sunday as the first day of the week (index 0)
-        // We treat Monday as the first day fo the week (index 0).
-        dateDayIndex = dateDayIndex -1;
-        if (dateDayIndex < 0) {
-            dateDayIndex = 6;
-        }
-        return dateDayIndex;
     }
     function _decrementDay(day) {
         day = day - 1;
