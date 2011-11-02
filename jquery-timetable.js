@@ -1931,6 +1931,10 @@
             }
         }
     }
+    function overlayOff(above) {
+        $('#overlay').hide();
+        $(above).css('z-index', 0);
+    }
     function hideAddBookDialog(evt) {
         $('#addBookDialog').hide();
         overlayOff('#addBookDialog');
@@ -2084,10 +2088,6 @@
             usehere = slotBookDict[bookname] || assumeUseAllBook;
             booklisttable.append(createBookListEntry(i, bookname, usehere));
         }
-    }
-    function overlayOff(above) {
-        $('#overlay').hide();
-        $(above).css('z-index', 0);
     }
     function _removeDictEntriesExcept(keysWanted, dict) {
         var entry;
