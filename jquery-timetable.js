@@ -1931,6 +1931,11 @@
             }
         }
     }
+    function hideAddBookDialog(evt) {
+        $('#addBookDialog').hide();
+        overlayOff('#addBookDialog');
+        $('#addBookOk').hide();
+    }
     function updateBookList() {
         var subject,
             cssClass,
@@ -2079,11 +2084,6 @@
             usehere = slotBookDict[bookname] || assumeUseAllBook;
             booklisttable.append(createBookListEntry(i, bookname, usehere));
         }
-    }
-    function hideAddBookDialog(evt) {
-        $('#addBookDialog').hide();
-        overlayOff('#addBookDialog');
-        $('#addBookOk').hide();
     }
     function overlayOff(above) {
         $('#overlay').hide();
