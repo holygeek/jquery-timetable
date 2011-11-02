@@ -936,6 +936,14 @@
     function setButtonEnabled(button, enabled) {
         $(button).attr('disabled', !enabled);
     }
+    function removeSlot(evt, elementToRemove) {
+        var slotToRemove = elementToRemove || currMouseOvered;
+        if (onSubject) {
+            return removeSubject(slotToRemove);
+        } else if (onTime) {
+            return removeTime(slotToRemove);
+        }
+    }
     function hideEditSubjectDialog(evt, fromOKButton) {
         var doAfterHideDialog;
         setButtonEnabled('#addduration', true);
@@ -1793,14 +1801,6 @@
         hideEdit();
         $(currMouseOvered).hide('fast');
         rerender();
-    }
-    function removeSlot(evt, elementToRemove) {
-        var slotToRemove = elementToRemove || currMouseOvered;
-        if (onSubject) {
-            return removeSubject(slotToRemove);
-        } else if (onTime) {
-            return removeTime(slotToRemove);
-        }
     }
     function etdOK() {
         var newTimeDuration,
