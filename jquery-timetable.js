@@ -1305,6 +1305,9 @@
     function moveToNextDay() {
         _moveBackOrForward('forward');
     }
+    function moveToPrevDay() {
+        _moveBackOrForward('back');
+    }
     function _buildPrevNextButtons(containerId) {
         var prevButton = _button('prevButton').html('&lt;').attr('title', 'Move back one day'),
             nextButton = _button('nextButton').html('&gt;').attr('title', 'Move forward one day'),
@@ -1380,9 +1383,6 @@
         inOutContainer.append(takeInDiv, arrow1, schoolBagContainer, arrow2, takeOutDiv);
 
         $(containerId).append(inOutContainer);
-    }
-    function moveToPrevDay() {
-        _moveBackOrForward('back');
     }
     function _activateTodayCompare() {
         var date = new Date(),
