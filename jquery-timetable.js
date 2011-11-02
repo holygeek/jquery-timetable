@@ -1801,6 +1801,15 @@
         $(containerId).append(editSubjectDialog);
         $('#' + id).mColorPicker();
     }
+    function addBookListTableHeader(booklisttable) {
+        var headers = [ 'Name', 'Use here', 'Action' ],
+            i
+        ;
+        for (i = 0; i < headers.length; i++) {
+            headers[i] = _th().html(headers[i]);
+        }
+        booklisttable.append.apply(booklisttable, headers);
+    }
     function addBookInView(evt) {
         var name,
             booklisttable,
@@ -2004,15 +2013,6 @@
     function overlayOff(above) {
         $('#overlay').hide();
         $(above).css('z-index', 0);
-    }
-    function addBookListTableHeader(booklisttable) {
-        var headers = [ 'Name', 'Use here', 'Action' ],
-            i
-        ;
-        for (i = 0; i < headers.length; i++) {
-            headers[i] = _th().html(headers[i]);
-        }
-        booklisttable.append.apply(booklisttable, headers);
     }
     function createBookListEntry(index, name, usehere) {
         var bookname = _td('bookName_' + index).html(name).attr('class', 'survivingBook'),
