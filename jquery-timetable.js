@@ -1412,6 +1412,16 @@
         });
         $(containerId).append(overlay);
     }
+    function editSlot(evt) {
+        thisIsANewSlot = 0;
+        elementToEdit = currMouseOvered;
+        setButtonEnabled('#addduration', false);
+        if (onSubject) {
+            return _editSubject(0, elementToEdit);
+        } else if (onTime) {
+            return _editTime(elementToEdit);
+        }
+    }
     function _buildEditWidget(containerId) {
         var editWidget = $('<div>')
                             .addClass('editWidget')
@@ -1783,16 +1793,6 @@
             bookname = booklist[i];
             usehere = slotBookDict[bookname] || assumeUseAllBook;
             booklisttable.append(createBookListEntry(i, bookname, usehere));
-        }
-    }
-    function editSlot(evt) {
-        thisIsANewSlot = 0;
-        elementToEdit = currMouseOvered;
-        setButtonEnabled('#addduration', false);
-        if (onSubject) {
-            return _editSubject(0, elementToEdit);
-        } else if (onTime) {
-            return _editTime(elementToEdit);
         }
     }
     function insertLeft(evt) {
