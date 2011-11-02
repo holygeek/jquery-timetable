@@ -748,6 +748,9 @@
     function _clearHighlight(klass) {
         $('.'+klass).removeClass('selected');
     }
+    function _highlight(el) {
+        $(el).addClass('selected');
+    }
     function setCompare(row, day, clicked, klass) {
         clickedDays[row] = day;
         if (hasTwoDaysSelected()) {
@@ -1945,9 +1948,6 @@
     }
     function _setCompareNextDay(dayIdx, buttonEl) {
         setCompare(1, dayIdx, buttonEl, 'dayBoxBottom');
-    }
-    function _highlight(el) {
-        $(el).addClass('selected');
     }
     function overlayOff(above) {
         $('#overlay').hide();
