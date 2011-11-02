@@ -1268,6 +1268,13 @@
         }
         return day;
     }
+    function _decrementDay(day) {
+        day = day - 1;
+        if (day < _Monday) {
+            day = _Sunday;
+        }
+        return day;
+    }
     function _moveBackOrForward(direction) {
         var backward = (direction === 'back'),
             selected = -1,
@@ -2077,13 +2084,6 @@
             target = target.parentNode;
         }
         return target;
-    }
-    function _decrementDay(day) {
-        day = day - 1;
-        if (day < _Monday) {
-            day = _Sunday;
-        }
-        return day;
     }
     function _swapTwoArrayElements(array, a, b) {
         var move = array.splice(a, 1);
