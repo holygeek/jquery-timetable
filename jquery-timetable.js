@@ -936,6 +936,26 @@
     function setButtonEnabled(button, enabled) {
         $(button).attr('disabled', !enabled);
     }
+    function removeSubject(target) {
+        var rowidx,
+            row,
+            idx,
+            id
+        ;
+        // FIXME Get rid of this if? run test to ensure it is safe
+        if (! currMouseOvered) {
+            return;
+        }
+
+        rowidx = getSelectedIndex(target);
+        row = rowidx.row;
+        idx = rowidx.idx;
+        settings.schedule.internal[row].splice(idx, 1);
+        hideEdit();
+        id = getId(row, idx);
+        $(id).hide('fast');
+        rerender();
+    }
     function removeSlot(evt, elementToRemove) {
         var slotToRemove = elementToRemove || currMouseOvered;
         if (onSubject) {
@@ -1763,26 +1783,6 @@
         editDialogIsVisible = 1;
         editSubjectDialog.show('fast');
         $('#newSubject').focus().select();
-    }
-    function removeSubject(target) {
-        var rowidx,
-            row,
-            idx,
-            id
-        ;
-        // FIXME Get rid of this if? run test to ensure it is safe
-        if (! currMouseOvered) {
-            return;
-        }
-
-        rowidx = getSelectedIndex(target);
-        row = rowidx.row;
-        idx = rowidx.idx;
-        settings.schedule.internal[row].splice(idx, 1);
-        hideEdit();
-        id = getId(row, idx);
-        $(id).hide('fast');
-        rerender();
     }
     function removeTime(target) {
         var i,
