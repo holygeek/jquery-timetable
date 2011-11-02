@@ -745,6 +745,9 @@
     function hasTwoDaysSelected() {
         return clickedDays[0] !== -1 && clickedDays[1] !== -1;
     }
+    function _clearHighlight(klass) {
+        $('.'+klass).removeClass('selected');
+    }
     function setCompare(row, day, clicked, klass) {
         clickedDays[row] = day;
         if (hasTwoDaysSelected()) {
@@ -1942,9 +1945,6 @@
     }
     function _setCompareNextDay(dayIdx, buttonEl) {
         setCompare(1, dayIdx, buttonEl, 'dayBoxBottom');
-    }
-    function _clearHighlight(klass) {
-        $('.'+klass).removeClass('selected');
     }
     function _highlight(el) {
         $(el).addClass('selected');
