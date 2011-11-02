@@ -1465,6 +1465,10 @@
             return _editTime(elementToEdit);
         }
     }
+    function insertLeft(evt) {
+        var relativeTo = currMouseOvered;
+        _insertNewSlot(0, relativeTo);
+    }
     function _buildEditWidget(containerId) {
         var editWidget = $('<div>')
                             .addClass('editWidget')
@@ -1837,10 +1841,6 @@
             usehere = slotBookDict[bookname] || assumeUseAllBook;
             booklisttable.append(createBookListEntry(i, bookname, usehere));
         }
-    }
-    function insertLeft(evt) {
-        var relativeTo = currMouseOvered;
-        _insertNewSlot(0, relativeTo);
     }
     function insertRight(evt) {
         var relativeTo = currMouseOvered;
