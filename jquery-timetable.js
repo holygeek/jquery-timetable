@@ -742,6 +742,9 @@
             _shiftStartDayBackward();
         }
     }
+    function hasTwoDaysSelected() {
+        return clickedDays[0] !== -1 && clickedDays[1] !== -1;
+    }
     function setCompare(row, day, clicked, klass) {
         clickedDays[row] = day;
         if (hasTwoDaysSelected()) {
@@ -2051,9 +2054,6 @@
             target = target.parentNode;
         }
         return target;
-    }
-    function hasTwoDaysSelected() {
-        return clickedDays[0] !== -1 && clickedDays[1] !== -1;
     }
     function getDayIndex(dateDayIndex) {
         // Javascript treats Sunday as the first day of the week (index 0)
