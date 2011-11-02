@@ -1908,6 +1908,22 @@
         dirtyBookList = $('#booklistheader').html();
         $('#addBookOk').fadeIn();
     }
+    function updateSlotUseHereStatus() {
+        // FIXME refactor these three or four lines into a function, we see
+        // many patterns like it all over the place - goal is to get the 'latest'
+        // status of the currently edited subject, which may be different than
+        // the one we have in schedule.internal[x][y]
+        var idx = _getSelectedSubjectIndex(elementToEdit),
+            slot = settings.schedule.internal[idx.row][idx.idx],
+            bookname;
+
+        var books = getOrCreateSlotBookDict(slot);
+        for (bookname in pendingSlotBooksAction) {
+            if (pendingSlotBooksAction.hasOwnProperty(bookname)) {
+                books[bookname] = pendingSlotBooksAction[bookname];
+            }
+        }
+    }
     function updateBookList() {
         var subject,
             cssClass,
@@ -2023,22 +2039,6 @@
 
         addBookDialog.bind('renderbooklist', renderBookList);
         $(containerId).append(addBookDialog);
-    }
-    function updateSlotUseHereStatus() {
-        // FIXME refactor these three or four lines into a function, we see
-        // many patterns like it all over the place - goal is to get the 'latest'
-        // status of the currently edited subject, which may be different than
-        // the one we have in schedule.internal[x][y]
-        var idx = _getSelectedSubjectIndex(elementToEdit),
-            slot = settings.schedule.internal[idx.row][idx.idx],
-            bookname;
-
-        var books = getOrCreateSlotBookDict(slot);
-        for (bookname in pendingSlotBooksAction) {
-            if (pendingSlotBooksAction.hasOwnProperty(bookname)) {
-                books[bookname] = pendingSlotBooksAction[bookname];
-            }
-        }
     }
     function getOrCreateSlotBookDict(slot) {
         var books = slot.books;
