@@ -1002,6 +1002,44 @@
         editDialogIsVisible = 0;
         $('#editTimeDialog').hide('fast', function() { rerender(); });
     }
+    function esdOK() {
+        var i,
+            dayRow,
+            newSubject,
+            subjectBgColor,
+            oldSubject,
+            id,
+            oldCssClassName,
+            newCssClassName,
+            fromOKButton
+        ;
+        setButtonEnabled('#addduration', true);
+        editDialogIsVisible = 0;
+        i = getSelectedIndex(elementToEdit);
+        dayRow = settings.schedule.internal[i.row];
+        newSubject= {
+            s: replaceUnsaveChars($('#newSubject').val()),
+            d: replaceUnsaveChars($('#newDuration').val()),
+            nobook: $('#nobooks').is(':checked'),
+            books: dayRow[i.idx].books
+        };
+        subjectBgColor = $('#subjectBgColor').val();
+        setSubjectBgColor(newSubject, subjectBgColor);
+        oldSubject = dayRow[i.idx];
+        dayRow[i.idx] = newSubject;
+        id = getId(i.row, i.idx);
+        $(id).html(newSubject.s);
+        oldCssClassName = getSubjectCssClassName(oldSubject);
+        newCssClassName = getSubjectCssClassName(newSubject);
+        $(id)
+            .css('width', durationToSize(newSubject.d) + 'px')
+            .removeClass(oldCssClassName)
+            .addClass(newCssClassName)
+            ;
+        $(id).css('background-color', getSubjectBgColor(newSubject));
+        fromOKButton = 'yes';
+        hideEditSubjectDialog(null, fromOKButton);
+    }
     function esdKeyUp(e) {
         var subject,
             subjectBgColor;
@@ -1821,44 +1859,6 @@
         settings.schedule.time.durations[i.idx] = newTimeDuration;
         mostFrequentDuration = getMostFrequestDuration(settings.schedule.time.durations);
         hideEditTimeDialog();
-    }
-    function esdOK() {
-        var i,
-            dayRow,
-            newSubject,
-            subjectBgColor,
-            oldSubject,
-            id,
-            oldCssClassName,
-            newCssClassName,
-            fromOKButton
-        ;
-        setButtonEnabled('#addduration', true);
-        editDialogIsVisible = 0;
-        i = getSelectedIndex(elementToEdit);
-        dayRow = settings.schedule.internal[i.row];
-        newSubject= {
-            s: replaceUnsaveChars($('#newSubject').val()),
-            d: replaceUnsaveChars($('#newDuration').val()),
-            nobook: $('#nobooks').is(':checked'),
-            books: dayRow[i.idx].books
-        };
-        subjectBgColor = $('#subjectBgColor').val();
-        setSubjectBgColor(newSubject, subjectBgColor);
-        oldSubject = dayRow[i.idx];
-        dayRow[i.idx] = newSubject;
-        id = getId(i.row, i.idx);
-        $(id).html(newSubject.s);
-        oldCssClassName = getSubjectCssClassName(oldSubject);
-        newCssClassName = getSubjectCssClassName(newSubject);
-        $(id)
-            .css('width', durationToSize(newSubject.d) + 'px')
-            .removeClass(oldCssClassName)
-            .addClass(newCssClassName)
-            ;
-        $(id).css('background-color', getSubjectBgColor(newSubject));
-        fromOKButton = 'yes';
-        hideEditSubjectDialog(null, fromOKButton);
     }
     function askForBooks() {
         var whenshown;
