@@ -731,6 +731,9 @@
                 }
         );
     }
+    function _getFirstDay() {
+        return settings.schedule.internal[0][0].s;
+    }
     function shiftUntil(shortDayName) {
         while (shortDayName !== _getFirstDay()) {
             _shiftStartDayBackward();
@@ -934,9 +937,6 @@
         if (onTime && settings.schedule.time.durations.length === 1) {
             $('#removeSlot').hide();
         }
-    }
-    function _getFirstDay() {
-        return settings.schedule.internal[0][0].s;
     }
     function esdKeyUp(e) {
         var subject,
