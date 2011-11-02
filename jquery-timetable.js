@@ -1670,6 +1670,24 @@
             </div>
         */
     }
+    function overlayOn(below, above) {
+        var offset,
+            width,
+            height
+        ;
+        below = $(below);
+        offset = below.offset();
+        width = below.outerWidth();
+        height = below.outerHeight();
+        $('#overlay').css({
+            display: 'block',
+            top: offset.top,
+            left: offset.left,
+            width: width,
+            height: height
+        });
+        $(above).css('z-index', 2);
+    }
     function askForBooks() {
         var whenshown;
         overlayOn('#editSubjectDialog', '#addBookDialog');
@@ -1986,24 +2004,6 @@
     function overlayOff(above) {
         $('#overlay').hide();
         $(above).css('z-index', 0);
-    }
-    function overlayOn(below, above) {
-        var offset,
-            width,
-            height
-        ;
-        below = $(below);
-        offset = below.offset();
-        width = below.outerWidth();
-        height = below.outerHeight();
-        $('#overlay').css({
-            display: 'block',
-            top: offset.top,
-            left: offset.left,
-            width: width,
-            height: height
-        });
-        $(above).css('z-index', 2);
     }
     function addBookListTableHeader(booklisttable) {
         var headers = [ 'Name', 'Use here', 'Action' ],
