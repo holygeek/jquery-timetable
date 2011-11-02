@@ -1835,6 +1835,9 @@
             bookname = getBookNameFromRowIndex(bookRowIdx);
         return bookname;
     }
+    function setPendingSlotBooksAction(bookname, use_or_not) {
+        pendingSlotBooksAction[bookname] = use_or_not;
+    }
     function updatePendingSlotBooksAction(evt) {
         var checkbox,
             bookname
@@ -2069,9 +2072,6 @@
     function overlayOff(above) {
         $('#overlay').hide();
         $(above).css('z-index', 0);
-    }
-    function setPendingSlotBooksAction(bookname, use_or_not) {
-        pendingSlotBooksAction[bookname] = use_or_not;
     }
     function removeBookInView(evt) {
         // Called when 'remove' <a> link is clicked
