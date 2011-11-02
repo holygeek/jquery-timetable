@@ -1053,6 +1053,23 @@
         fromOKButton = 'yes';
         hideEditSubjectDialog(null, fromOKButton);
     }
+    function etdOK() {
+        var newTimeDuration,
+            i
+        ;
+        setButtonEnabled('#addduration', true);
+        newTimeDuration = replaceUnsaveChars($('#newTimeDuration').val());
+        if (newTimeDuration.match(/[0-9]+/)) {
+            newTimeDuration = parseInt(newTimeDuration, 10);
+        } else {
+            alert("Duration must be in minutes");
+            return;
+        }
+        i = getSelectedIndex(elementToEdit);
+        settings.schedule.time.durations[i.idx] = newTimeDuration;
+        mostFrequentDuration = getMostFrequestDuration(settings.schedule.time.durations);
+        hideEditTimeDialog();
+    }
     function esdKeyUp(e) {
         var subject,
             subjectBgColor;
@@ -1855,23 +1872,6 @@
         editDialogIsVisible = 1;
         editSubjectDialog.show('fast');
         $('#newSubject').focus().select();
-    }
-    function etdOK() {
-        var newTimeDuration,
-            i
-        ;
-        setButtonEnabled('#addduration', true);
-        newTimeDuration = replaceUnsaveChars($('#newTimeDuration').val());
-        if (newTimeDuration.match(/[0-9]+/)) {
-            newTimeDuration = parseInt(newTimeDuration, 10);
-        } else {
-            alert("Duration must be in minutes");
-            return;
-        }
-        i = getSelectedIndex(elementToEdit);
-        settings.schedule.time.durations[i.idx] = newTimeDuration;
-        mostFrequentDuration = getMostFrequestDuration(settings.schedule.time.durations);
-        hideEditTimeDialog();
     }
     function askForBooks() {
         var whenshown;
