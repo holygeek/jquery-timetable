@@ -1194,6 +1194,42 @@
         $('#subjectBgColor').bind('change', updateSubjectBagroundColor);
         registerBindingForClearance('#subjectBgColor', 'change');
     }
+    function _buildCompareContainer(parentContainer, containerId, title, buttonIdPrefix, klass) {
+        var button,
+            compareContainer = _div(containerId),
+            firstDay = _getFulldayName(_getFirstDay()),
+            dayIndex = 0,
+            i;
+
+        compareContainer.append(_div().attr('class', 'compareTitle').html(title));
+        while(days[dayIndex] !== firstDay) {
+            dayIndex++;
+        }
+        for (i = 0; i < days.length; i++) {
+            button = _button(buttonIdPrefix + i).attr({
+                        'class': klass,
+                     })
+                     .click(_setCompare)
+                     .html(days[dayIndex]);
+            compareContainer.append(button);
+            dayIndex++;
+            dayIndex = dayIndex % 7;
+        }
+
+        // FIXME remove these commented out htmls
+        /*
+        <div id="compareContainer2">
+        <div class="compareTitle">Next</div>
+        <button id="b0" class="dayBoxBottom" onclick="schedule.setCompare(1, 0, this, 'dayBoxBottom')">Monday</button>
+        <button id="b1" class="dayBoxBottom" onclick="schedule.setCompare(1, 1, this, 'dayBoxBottom')">Tuesday</button>
+        <button id="b2" class="dayBoxBottom" onclick="schedule.setCompare(1, 2, this, 'dayBoxBottom')">Wednesday</button>
+        <button id="b3" class="dayBoxBottom" onclick="schedule.setCompare(1, 3, this, 'dayBoxBottom')">Thursday</button>
+        <button id="b4" class="dayBoxBottom" onclick="schedule.setCompare(1, 4, this, 'dayBoxBottom')">Friday</button>
+        <button id="b5" class="dayBoxBottom" onclick="schedule.setCompare(1, 5, this, 'dayBoxBottom')">Saturday</button>
+        <button id="b6" class="dayBoxBottom" onclick="schedule.setCompare(1, 6, this, 'dayBoxBottom')">Sunday</button>
+        </div>*/
+        $('#' + parentContainer).append(compareContainer);
+    }
     function _buildCompareWidget(containerId) {
         var id = 'compareContainer';
         $(containerId).append(_div(id));
@@ -1240,42 +1276,6 @@
         inOutContainer.append(takeInDiv, arrow1, schoolBagContainer, arrow2, takeOutDiv);
 
         $(containerId).append(inOutContainer);
-    }
-    function _buildCompareContainer(parentContainer, containerId, title, buttonIdPrefix, klass) {
-        var button,
-            compareContainer = _div(containerId),
-            firstDay = _getFulldayName(_getFirstDay()),
-            dayIndex = 0,
-            i;
-
-        compareContainer.append(_div().attr('class', 'compareTitle').html(title));
-        while(days[dayIndex] !== firstDay) {
-            dayIndex++;
-        }
-        for (i = 0; i < days.length; i++) {
-            button = _button(buttonIdPrefix + i).attr({
-                        'class': klass,
-                     })
-                     .click(_setCompare)
-                     .html(days[dayIndex]);
-            compareContainer.append(button);
-            dayIndex++;
-            dayIndex = dayIndex % 7;
-        }
-
-        // FIXME remove these commented out htmls
-        /*
-        <div id="compareContainer2">
-        <div class="compareTitle">Next</div>
-        <button id="b0" class="dayBoxBottom" onclick="schedule.setCompare(1, 0, this, 'dayBoxBottom')">Monday</button>
-        <button id="b1" class="dayBoxBottom" onclick="schedule.setCompare(1, 1, this, 'dayBoxBottom')">Tuesday</button>
-        <button id="b2" class="dayBoxBottom" onclick="schedule.setCompare(1, 2, this, 'dayBoxBottom')">Wednesday</button>
-        <button id="b3" class="dayBoxBottom" onclick="schedule.setCompare(1, 3, this, 'dayBoxBottom')">Thursday</button>
-        <button id="b4" class="dayBoxBottom" onclick="schedule.setCompare(1, 4, this, 'dayBoxBottom')">Friday</button>
-        <button id="b5" class="dayBoxBottom" onclick="schedule.setCompare(1, 5, this, 'dayBoxBottom')">Saturday</button>
-        <button id="b6" class="dayBoxBottom" onclick="schedule.setCompare(1, 6, this, 'dayBoxBottom')">Sunday</button>
-        </div>*/
-        $('#' + parentContainer).append(compareContainer);
     }
     function _setCompare() {
         var id = $(this).attr('id'),
