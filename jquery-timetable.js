@@ -1542,6 +1542,14 @@
             return _moveSubjectLeft(slotToMove);
         }
     }
+    function moveRight(evt) {
+        var slotToMove = currMouseOvered;
+        if (onTime) {
+            return _moveTimeRight(slotToMove);
+        } else if (onSubject) {
+            return _moveSubjectRight(slotToMove);
+        }
+    }
     function _buildEditWidget(containerId) {
         var editWidget = $('<div>')
                             .addClass('editWidget')
@@ -1913,14 +1921,6 @@
             bookname = booklist[i];
             usehere = slotBookDict[bookname] || assumeUseAllBook;
             booklisttable.append(createBookListEntry(i, bookname, usehere));
-        }
-    }
-    function moveRight(evt) {
-        var slotToMove = currMouseOvered;
-        if (onTime) {
-            return _moveTimeRight(slotToMove);
-        } else if (onSubject) {
-            return _moveSubjectRight(slotToMove);
         }
     }
     function _moveTimeRight(slotToMove) {
