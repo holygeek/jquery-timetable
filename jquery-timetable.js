@@ -1670,6 +1670,17 @@
             </div>
         */
     }
+    function askForBooks() {
+        var whenshown;
+        overlayOn('#editSubjectDialog', '#addBookDialog');
+        putAbsBottomOf('addbooks', 'addBookDialog');
+        $('#booklist').html('');
+        $('#addBookDialog').trigger('renderbooklist');
+        whenshown = function() {
+            $('#bookname').focus().select();
+        };
+        $('#addBookDialog').show('fast', whenshown);
+    }
     function _buildEditSubjectDialog(containerId) {
         /* <div id="editSubjectDialog"></div> */
         var editSubjectDialog = _div('editSubjectDialog').mouseover(hideEdit),
@@ -1943,17 +1954,6 @@
             usehere = slotBookDict[bookname] || assumeUseAllBook;
             booklisttable.append(createBookListEntry(i, bookname, usehere));
         }
-    }
-    function askForBooks() {
-        var whenshown;
-        overlayOn('#editSubjectDialog', '#addBookDialog');
-        putAbsBottomOf('addbooks', 'addBookDialog');
-        $('#booklist').html('');
-        $('#addBookDialog').trigger('renderbooklist');
-        whenshown = function() {
-            $('#bookname').focus().select();
-        };
-        $('#addBookDialog').show('fast', whenshown);
     }
     function addBookInView(evt) {
         var name,
