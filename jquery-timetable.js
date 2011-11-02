@@ -1810,6 +1810,23 @@
         }
         booklisttable.append.apply(booklisttable, headers);
     }
+    function createBookListEntry(index, name, usehere) {
+        var bookname = _td('bookName_' + index).html(name).attr('class', 'survivingBook'),
+            checkboxInTd = _td()
+                        .append(
+                            _checkbox('bookUseHere_' + index)
+                                .attr('checked', usehere)
+                                .change(updatePendingSlotBooksAction)
+                        )
+                        .css('text-align', 'center'),
+            removeLink = _td().append(
+                            _a('bookRemove_' + index)
+                                .html('remove')
+                                .attr('href', '#')
+                                .click(removeBookInView)
+            );
+        return _tr().append(bookname, checkboxInTd, removeLink);
+    }
     function addBookInView(evt) {
         var name,
             booklisttable,
@@ -2013,23 +2030,6 @@
     function overlayOff(above) {
         $('#overlay').hide();
         $(above).css('z-index', 0);
-    }
-    function createBookListEntry(index, name, usehere) {
-        var bookname = _td('bookName_' + index).html(name).attr('class', 'survivingBook'),
-            checkboxInTd = _td()
-                        .append(
-                            _checkbox('bookUseHere_' + index)
-                                .attr('checked', usehere)
-                                .change(updatePendingSlotBooksAction)
-                        )
-                        .css('text-align', 'center'),
-            removeLink = _td().append(
-                            _a('bookRemove_' + index)
-                                .html('remove')
-                                .attr('href', '#')
-                                .click(removeBookInView)
-            );
-        return _tr().append(bookname, checkboxInTd, removeLink);
     }
     function updatePendingSlotBooksAction(evt) {
         var checkbox,
