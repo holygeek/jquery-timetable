@@ -997,6 +997,11 @@
         };
         $('#editSubjectDialog').hide('fast', doAfterHideDialog);
     }
+    function hideEditTimeDialog() {
+        setButtonEnabled('#addduration', true);
+        editDialogIsVisible = 0;
+        $('#editTimeDialog').hide('fast', function() { rerender(); });
+    }
     function esdKeyUp(e) {
         var subject,
             subjectBgColor;
@@ -1285,11 +1290,6 @@
         }
         setCompare(0, day, '#t'+day, 'dayBoxTop');
         setCompare(1, nextDay, '#b'+nextDay, 'dayBoxBottom');
-    }
-    function hideEditTimeDialog() {
-        setButtonEnabled('#addduration', true);
-        editDialogIsVisible = 0;
-        $('#editTimeDialog').hide('fast', function() { rerender(); });
     }
     function _buildOverlay(containerId) {
         var overlay = _div('overlay').css({
