@@ -170,6 +170,97 @@
     function _intValue(str) {
         return parseInt(str, 10);
     }
+    function showCompare(prev, next) {
+        // FIXME camelCase
+        var text,
+            subject,
+            takeout_subjects = [],
+            takein_subjects = [],
+            bookDiff,
+            takein_text = [],
+            takeout_text = [],
+            subjects_stay = {},
+            fullOutDayName,
+            fullInDayName,
+            tableShown,
+            i;
+
+        // take out
+        for (i = 1; i < prev.length; i++) {
+            subject = prev[i];
+            subject.stay = slotExists(subject.s, next);
+            if (hasBook(subject) && subject.stay === true) {
+                subjects_stay[subject.s] = subject;
+            }
+        }
+        // take in
+        for(i = 1; i < next.length; i++) {
+            subject = next[i];
+            subject.take = !slotExists(subject.s, prev);
+            if (hasBook(next[i]) && next[i].take === false) {
+                subjects_stay[subject.s] = subject;
+            }
+        }
+        // stay
+        for (i in subjects_stay) {
+            if (subjects_stay.hasOwnProperty(i)) {
+                subject = subjects_stay[i];
+                bookDiff = compareSameSubjectBooks(subject, prev, next);
+                if (bookDiff) {
+                    addBookDiffEntry(subject, {
+                            'out' : {
+                                subjects : takeout_subjects,
+                                text : takeout_text
+                            },
+                            'in' : {
+                                subjects : takein_subjects,
+                                text : takein_text
+                            }
+                        },
+                        bookDiff
+                    );
+                }
+            }
+        }
+
+        // TODO Refactor the following similar code for take in and take out
+        for (i = 1; i < prev.length; i++) {
+            subject = prev[i];
+            if (hasBook(subject) && subject.stay === false) {
+                takeout_text.push(_buildTakeInOutDiv(subject));
+                takeout_subjects.push(subject);
+            }
+        }
+        fullOutDayName = _getFulldayName(prev[0].s);
+        text = 'Take out from ' + fullOutDayName;
+        $('#takeout').html('');
+        $('#takeout').append(_div().attr('class', 'taketext').html(text));
+        $('#takeout').append(takeout_text.join(''));
+
+        for (i = 1; i < next.length; i++) {
+            subject = next[i];
+            if (hasBook(subject) && subject.take === true) {
+                takein_text.push(_buildTakeInOutDiv(subject));
+                takein_subjects.push(subject);
+            }
+        }
+        fullInDayName = _getFulldayName(next[0].s);
+        text = 'Put in for ' + fullInDayName;
+        $('#takein').html('');
+        $('#takein').append(_div().attr('class', 'taketext').html(text));
+        $('#takein').append(takein_text.join(''));
+
+        if ($('#inoutbook').size() === 0) {
+            $('#inoutcontainer').append(_div('inoutbook'));
+        } else {
+            $('#inoutbook').html('');
+        }
+        tableShown = populateInOutBooks($('#inoutbook'), takein_subjects, takeout_subjects);
+        if (tableShown) {
+            $('#bookInHeader').html('In for ' + fullInDayName);
+            $('#bookOutHeader').html('Out from ' + fullOutDayName);
+        }
+    }
     function rerender(opts) {
         var entry;
         if (opts) {
@@ -929,97 +1020,6 @@
         if (hasBookIn) {
             take['in'].text.push(_buildTakeInOutDiv(subject));
             take['in'].subjects.push( { s: subject.s, books: booksIn  });
-        }
-    }
-    function showCompare(prev, next) {
-        // FIXME camelCase
-        var text,
-            subject,
-            takeout_subjects = [],
-            takein_subjects = [],
-            bookDiff,
-            takein_text = [],
-            takeout_text = [],
-            subjects_stay = {},
-            fullOutDayName,
-            fullInDayName,
-            tableShown,
-            i;
-
-        // take out
-        for (i = 1; i < prev.length; i++) {
-            subject = prev[i];
-            subject.stay = slotExists(subject.s, next);
-            if (hasBook(subject) && subject.stay === true) {
-                subjects_stay[subject.s] = subject;
-            }
-        }
-        // take in
-        for(i = 1; i < next.length; i++) {
-            subject = next[i];
-            subject.take = !slotExists(subject.s, prev);
-            if (hasBook(next[i]) && next[i].take === false) {
-                subjects_stay[subject.s] = subject;
-            }
-        }
-        // stay
-        for (i in subjects_stay) {
-            if (subjects_stay.hasOwnProperty(i)) {
-                subject = subjects_stay[i];
-                bookDiff = compareSameSubjectBooks(subject, prev, next);
-                if (bookDiff) {
-                    addBookDiffEntry(subject, {
-                            'out' : {
-                                subjects : takeout_subjects,
-                                text : takeout_text
-                            },
-                            'in' : {
-                                subjects : takein_subjects,
-                                text : takein_text
-                            }
-                        },
-                        bookDiff
-                    );
-                }
-            }
-        }
-
-        // TODO Refactor the following similar code for take in and take out
-        for (i = 1; i < prev.length; i++) {
-            subject = prev[i];
-            if (hasBook(subject) && subject.stay === false) {
-                takeout_text.push(_buildTakeInOutDiv(subject));
-                takeout_subjects.push(subject);
-            }
-        }
-        fullOutDayName = _getFulldayName(prev[0].s);
-        text = 'Take out from ' + fullOutDayName;
-        $('#takeout').html('');
-        $('#takeout').append(_div().attr('class', 'taketext').html(text));
-        $('#takeout').append(takeout_text.join(''));
-
-        for (i = 1; i < next.length; i++) {
-            subject = next[i];
-            if (hasBook(subject) && subject.take === true) {
-                takein_text.push(_buildTakeInOutDiv(subject));
-                takein_subjects.push(subject);
-            }
-        }
-        fullInDayName = _getFulldayName(next[0].s);
-        text = 'Put in for ' + fullInDayName;
-        $('#takein').html('');
-        $('#takein').append(_div().attr('class', 'taketext').html(text));
-        $('#takein').append(takein_text.join(''));
-
-        if ($('#inoutbook').size() === 0) {
-            $('#inoutcontainer').append(_div('inoutbook'));
-        } else {
-            $('#inoutbook').html('');
-        }
-        tableShown = populateInOutBooks($('#inoutbook'), takein_subjects, takeout_subjects);
-        if (tableShown) {
-            $('#bookInHeader').html('In for ' + fullInDayName);
-            $('#bookOutHeader').html('Out from ' + fullOutDayName);
         }
     }
     function updatePrevNextButtonText(startDayName, prevDaySelected, nextDaySelected) {
