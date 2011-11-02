@@ -326,6 +326,53 @@
             }
         }
     }
+    function populateInOutBooks(node, takein_subjects, takeout_subjects) {
+        var table = _table(),
+            putInHeader =_th().html('In').attr({'colspan': 2, 'id': 'bookInHeader'}),
+            takeOutHeader = _th().html('Out').attr({'colspan': 2, 'id': 'bookOutHeader'}),
+            i = 0, tr, j,
+            ntakein = takein_subjects.length,
+            ntakeout = takeout_subjects.length,
+            books, subject,
+            showBookTable
+        ;
+
+        table.append(_tr().append(putInHeader, takeOutHeader));
+        table.append(
+                _tr().append(
+                    _th().html('Subject'),
+                    _th().html('Book'),
+                    _th().html('Subject'),
+                    _th().html('Book')
+                )
+        );
+
+        while (i < ntakein || i < ntakeout) {
+            tr = _tr();
+            if (i < ntakein) {
+                if (populateInOutBooksRow(tr, takein_subjects[i])) {
+                    showBookTable = 1;
+                }
+            } else {
+                tr.append(emptyTd(), emptyTd());
+            }
+            if (i < ntakeout) {
+                if(populateInOutBooksRow(tr, takeout_subjects[i])) {
+                    showBookTable = 1;
+                }
+            } /* else {
+                // No need to add here as the cells won't have flush left issue
+            } */
+            table.append(tr);
+            i++;
+        }
+
+        if (showBookTable) {
+            node.append(table);
+            return 1; // To indicate that we are showing the table
+        }
+        return 0;
+    }
     function showCompare(prev, next) {
         // FIXME camelCase
         var text,
@@ -1124,53 +1171,6 @@
             tr.append(emptyTd());
         }
         return hasBookListed;
-    }
-    function populateInOutBooks(node, takein_subjects, takeout_subjects) {
-        var table = _table(),
-            putInHeader =_th().html('In').attr({'colspan': 2, 'id': 'bookInHeader'}),
-            takeOutHeader = _th().html('Out').attr({'colspan': 2, 'id': 'bookOutHeader'}),
-            i = 0, tr, j,
-            ntakein = takein_subjects.length,
-            ntakeout = takeout_subjects.length,
-            books, subject,
-            showBookTable
-        ;
-
-        table.append(_tr().append(putInHeader, takeOutHeader));
-        table.append(
-                _tr().append(
-                    _th().html('Subject'),
-                    _th().html('Book'),
-                    _th().html('Subject'),
-                    _th().html('Book')
-                )
-        );
-
-        while (i < ntakein || i < ntakeout) {
-            tr = _tr();
-            if (i < ntakein) {
-                if (populateInOutBooksRow(tr, takein_subjects[i])) {
-                    showBookTable = 1;
-                }
-            } else {
-                tr.append(emptyTd(), emptyTd());
-            }
-            if (i < ntakeout) {
-                if(populateInOutBooksRow(tr, takeout_subjects[i])) {
-                    showBookTable = 1;
-                }
-            } /* else {
-                // No need to add here as the cells won't have flush left issue
-            } */
-            table.append(tr);
-            i++;
-        }
-
-        if (showBookTable) {
-            node.append(table);
-            return 1; // To indicate that we are showing the table
-        }
-        return 0;
     }
     function getSelectedIndex(el) {
         if (onSubject) {
