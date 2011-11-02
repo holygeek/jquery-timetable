@@ -1109,6 +1109,22 @@
             return;
         }
     }
+    function animateSlotSize(e) {
+        var text,
+            width;
+        if ($(elementToEdit).attr('id').match(/^j/)) {
+            text = $('#newDuration').val();
+        } else {
+            text = $('#newTimeDuration').val();
+        }
+        if (!text.match(/^ *[0-9]+ */)) {
+            return;
+        }
+        text = parseInt(text, 10);
+        width = durationToSize(text);
+        $('#' + timetableId).css('width', timetableWidth + width + 'px');
+        $(elementToEdit).animate({width: width + 'px'});
+    }
     function enableEditMode() {
 
         var time = settings.schedule.time,
@@ -1177,22 +1193,6 @@
 
         $('.' + klass).css('background-color', $(this).val());
         $(elementToEdit).css('background-color', $(this).val());
-    }
-    function animateSlotSize(e) {
-        var text,
-            width;
-        if ($(elementToEdit).attr('id').match(/^j/)) {
-            text = $('#newDuration').val();
-        } else {
-            text = $('#newTimeDuration').val();
-        }
-        if (!text.match(/^ *[0-9]+ */)) {
-            return;
-        }
-        text = parseInt(text, 10);
-        width = durationToSize(text);
-        $('#' + timetableId).css('width', timetableWidth + width + 'px');
-        $(elementToEdit).animate({width: width + 'px'});
     }
     function _buildCompareWidget(containerId) {
         var id = 'compareContainer';
