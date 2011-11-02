@@ -1252,6 +1252,33 @@
             $(el).removeClass('selected');
         }
     }
+    function _moveBackOrForward(direction) {
+        var backward = (direction === 'back'),
+            selected = -1,
+            otherSelected;
+
+        $('.dayBoxTop').each(function(i, e){
+            if ($(e).hasClass('selected')) {
+                selected = i;
+            }
+        });
+        if (selected === -1) {
+            selected = getDayIndex(new Date().getDay());
+        }
+
+        otherSelected = _incrementDay(selected);
+
+        if (backward) {
+            selected = _decrementDay(selected);
+            otherSelected = _decrementDay(otherSelected);
+        } else {
+            selected = _incrementDay(selected);
+            otherSelected = _incrementDay(otherSelected);
+        }
+
+        setCompare(0, selected, '#t'+selected, 'dayBoxTop');
+        setCompare(1, otherSelected, '#b'+otherSelected, 'dayBoxBottom');
+    }
     function moveToNextDay() {
         _moveBackOrForward('forward');
     }
@@ -1333,33 +1360,6 @@
     }
     function moveToPrevDay() {
         _moveBackOrForward('back');
-    }
-    function _moveBackOrForward(direction) {
-        var backward = (direction === 'back'),
-            selected = -1,
-            otherSelected;
-
-        $('.dayBoxTop').each(function(i, e){
-            if ($(e).hasClass('selected')) {
-                selected = i;
-            }
-        });
-        if (selected === -1) {
-            selected = getDayIndex(new Date().getDay());
-        }
-
-        otherSelected = _incrementDay(selected);
-
-        if (backward) {
-            selected = _decrementDay(selected);
-            otherSelected = _decrementDay(otherSelected);
-        } else {
-            selected = _incrementDay(selected);
-            otherSelected = _incrementDay(otherSelected);
-        }
-
-        setCompare(0, selected, '#t'+selected, 'dayBoxTop');
-        setCompare(1, otherSelected, '#b'+otherSelected, 'dayBoxBottom');
     }
     function _activateTodayCompare() {
         var date = new Date(),
