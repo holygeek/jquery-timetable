@@ -818,6 +818,9 @@
             }
         }
     }
+    function hideEdit() {
+        $('#editOption').hide();
+    }
     function _maybeHideEdit(e) {
         var relTarg,
             hide;
@@ -1218,9 +1221,6 @@
             row : parseInt(rowidx[0], 10),
             idx : parseInt(rowidx[1], 10)
         };
-    }
-    function hideEdit() {
-        $('#editOption').hide();
     }
     function hideEditTimeDialog() {
         setButtonEnabled('#addduration', true);
