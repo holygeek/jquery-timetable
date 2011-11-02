@@ -850,6 +850,10 @@
             idx : parseInt(rowidx[1], 10)
         };
     }
+    function _getSelectedTimeIndex(el) {
+        var timeIdx = $(el).attr('id').replace('time', '');
+        return { idx : parseInt(timeIdx, 10) };
+    }
     function getSelectedIndex(el) {
         if (onSubject) {
             return _getSelectedSubjectIndex(el||currMouseOvered);
@@ -1217,10 +1221,6 @@
         }
         setCompare(0, day, '#t'+day, 'dayBoxTop');
         setCompare(1, nextDay, '#b'+nextDay, 'dayBoxBottom');
-    }
-    function _getSelectedTimeIndex(el) {
-        var timeIdx = $(el).attr('id').replace('time', '');
-        return { idx : parseInt(timeIdx, 10) };
     }
     function hideEditTimeDialog() {
         setButtonEnabled('#addduration', true);
