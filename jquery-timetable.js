@@ -334,6 +334,9 @@
         }
         return  booksFor[cssClass];
     }
+    function emptyTd() {
+        return _td().html('&nbsp;');
+    }
     function populateInOutBooksRow(tr, subject) {
         var j, bookname, allBooks, bookTd, hasBookListed = 0;
         tr.append(_td().append(_buildTakeInOutDiv(subject)));
@@ -2048,9 +2051,6 @@
             target = target.parentNode;
         }
         return target;
-    }
-    function emptyTd() {
-        return _td().html('&nbsp;');
     }
     function hasTwoDaysSelected() {
         return clickedDays[0] !== -1 && clickedDays[1] !== -1;
