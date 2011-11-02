@@ -200,6 +200,42 @@
         }
         return ! subject.nobook;
     }
+    function compareSameSubjectBooks(subject, prev, next) {
+        var hasBookToRemove,
+            hasBookToAdd,
+            bookname,
+            prevBooksNeeded,
+            nextBooksNeeded,
+            bookDiff = {},
+            result = false;
+
+        prevBooksNeeded = getNeededBooks(subject, prev);
+        nextBooksNeeded = getNeededBooks(subject, next);
+        for (bookname in prevBooksNeeded) {
+            if (prevBooksNeeded.hasOwnProperty(bookname)) {
+                if (!nextBooksNeeded[bookname]) {
+                    bookDiff[bookname] = BOOK_DIFF_REMOVE;
+                    hasBookToRemove = true;
+                } else {
+                    bookDiff[bookname] = BOOK_DIFF_STAY;
+                }
+            }
+        }
+        for (bookname in nextBooksNeeded) {
+            if (nextBooksNeeded.hasOwnProperty(bookname)) {
+                if (!prevBooksNeeded[bookname]) {
+                    hasBookToAdd = true;
+                    bookDiff[bookname] = BOOK_DIFF_ADD;
+                } else {
+                    bookDiff[bookname] = BOOK_DIFF_STAY;
+                }
+            }
+        }
+        if (hasBookToRemove || hasBookToAdd) {
+            result = bookDiff;
+        }
+        return result;
+    }
     function showCompare(prev, next) {
         // FIXME camelCase
         var text,
@@ -986,42 +1022,6 @@
             }
         }
         return neededBooks;
-    }
-    function compareSameSubjectBooks(subject, prev, next) {
-        var hasBookToRemove,
-            hasBookToAdd,
-            bookname,
-            prevBooksNeeded,
-            nextBooksNeeded,
-            bookDiff = {},
-            result = false;
-
-        prevBooksNeeded = getNeededBooks(subject, prev);
-        nextBooksNeeded = getNeededBooks(subject, next);
-        for (bookname in prevBooksNeeded) {
-            if (prevBooksNeeded.hasOwnProperty(bookname)) {
-                if (!nextBooksNeeded[bookname]) {
-                    bookDiff[bookname] = BOOK_DIFF_REMOVE;
-                    hasBookToRemove = true;
-                } else {
-                    bookDiff[bookname] = BOOK_DIFF_STAY;
-                }
-            }
-        }
-        for (bookname in nextBooksNeeded) {
-            if (nextBooksNeeded.hasOwnProperty(bookname)) {
-                if (!prevBooksNeeded[bookname]) {
-                    hasBookToAdd = true;
-                    bookDiff[bookname] = BOOK_DIFF_ADD;
-                } else {
-                    bookDiff[bookname] = BOOK_DIFF_STAY;
-                }
-            }
-        }
-        if (hasBookToRemove || hasBookToAdd) {
-            result = bookDiff;
-        }
-        return result;
     }
     function addBookDiffEntry(subject, take, bookDiff) {
         var bookname,
