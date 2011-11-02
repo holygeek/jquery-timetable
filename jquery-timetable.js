@@ -2163,7 +2163,7 @@
                 }
             }
             /* Shift daily slot array so that it starts at startDay */
-            if (options.schedule.startDay && options.schedule.startDay != 'Monday') {
+            if (options.schedule.startDay && options.schedule.startDay !== 'Monday') {
                 shortDayName = options.schedule.startDay.substr(0, 2);
                 i = 0;
                 while (shortDayName !== timetable[0][0].s) {
