@@ -1908,6 +1908,13 @@
         dirtyBookList = $('#booklistheader').html();
         $('#addBookOk').fadeIn();
     }
+    function getOrCreateSlotBookDict(slot) {
+        var books = slot.books;
+        if (! books) {
+            slot.books = {};
+        }
+        return slot.books;
+    }
     function updateSlotUseHereStatus() {
         // FIXME refactor these three or four lines into a function, we see
         // many patterns like it all over the place - goal is to get the 'latest'
@@ -2039,13 +2046,6 @@
 
         addBookDialog.bind('renderbooklist', renderBookList);
         $(containerId).append(addBookDialog);
-    }
-    function getOrCreateSlotBookDict(slot) {
-        var books = slot.books;
-        if (! books) {
-            slot.books = {};
-        }
-        return slot.books;
     }
     function renderBookList(evt) {
         pendingSlotBooksAction = {};
