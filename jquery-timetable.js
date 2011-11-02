@@ -843,75 +843,6 @@
             hideEdit();
         }
     }
-    function enableEditMode() {
-
-        var time = settings.schedule.time,
-            newValue;
-
-        $('#editOption').mouseout(_maybeHideEdit);
-        registerBindingForClearance('#editOption', 'mouseout');
-
-        $('#startDay').change(changeStartDay);
-        registerBindingForClearance('#startDay', 'change');
-
-        $('.time').mouseover(showEdit);
-        registerBindingForClearance('.time', 'mouseover');
-        $('.time').mouseout(_maybeHideEdit);
-        registerBindingForClearance('.time', 'mouseout');
-        $('.time').mouseover(function(){$(this).css('cursor', 'pointer');});
-        registerBindingForClearance('.time', 'mouseover');
-        $('.subjectslot').mouseover(showEdit);
-        registerBindingForClearance('.subjectslot', 'mouseover');
-        $('.subjectslot').mouseout(_maybeHideEdit);
-        registerBindingForClearance('.subjectslot', 'mouseout');
-        $('#dayTimeScale').show();
-        $('.subjectslot').mouseover(function(){$(this).css('cursor', 'pointer');});
-        registerBindingForClearance('.subjectslot', 'mouseover');
-
-        $('#startDay').val(_getFulldayName(_getFirstDay()));
-        $('#startHour').val(time.start.hour);
-        $('#startMinute').val(pad0(time.start.minute));
-        $('#scaleSelect').val(settings.schedule.pixel_per_minute.toString());
-        $('.slot').css('height','30px');
-        $('.slot').css('padding-top','10px');
-        $('.time').css('height','35px');
-        $('.time').css('padding-top','10px');
-
-        $('#newSubject').keyup(esdKeyUp);
-        registerBindingForClearance('#newSubject', 'keyup');
-        $('#newDuration').keyup(esdKeyUp);
-        registerBindingForClearance('#newDuration', 'keyup');
-        $('#newDuration').keyup(animateSlotSize);
-        registerBindingForClearance('#newDuration', 'keyup');
-
-        $('.day').mouseover(showEdit);
-        registerBindingForClearance('.day', 'mouseover');
-        $('.day').mouseout(_maybeHideEdit);
-        registerBindingForClearance('.day', 'mouseout');
-        $('.day').mouseover(function(){$(this).css('cursor', 'pointer');});
-        registerBindingForClearance('.day', 'mouseover');
-
-        $('button#addduration').bind('click', function() {
-            newValue = _intValue($('#newduration').val());
-            if (isNaN(newValue)) {
-                return;
-            }
-            time.durations.push(newValue);
-            rerender();
-            $('#newduration').val(newValue);
-        });
-        registerBindingForClearance('button#adddurationc', 'click');
-
-        $('#subjectBgColor').bind('change', updateSubjectBagroundColor);
-        registerBindingForClearance('#subjectBgColor', 'change');
-    }
-    function updateSubjectBagroundColor(evt) {
-        var subject = $(elementToEdit).html(),
-            klass = getSubjectCssClassName({ s:subject });
-
-        $('.' + klass).css('background-color', $(this).val());
-        $(elementToEdit).css('background-color', $(this).val());
-    }
     function showEdit() {
         var time,
             x,
@@ -983,6 +914,75 @@
         if (onTime && settings.schedule.time.durations.length === 1) {
             $('#removeSlot').hide();
         }
+    }
+    function enableEditMode() {
+
+        var time = settings.schedule.time,
+            newValue;
+
+        $('#editOption').mouseout(_maybeHideEdit);
+        registerBindingForClearance('#editOption', 'mouseout');
+
+        $('#startDay').change(changeStartDay);
+        registerBindingForClearance('#startDay', 'change');
+
+        $('.time').mouseover(showEdit);
+        registerBindingForClearance('.time', 'mouseover');
+        $('.time').mouseout(_maybeHideEdit);
+        registerBindingForClearance('.time', 'mouseout');
+        $('.time').mouseover(function(){$(this).css('cursor', 'pointer');});
+        registerBindingForClearance('.time', 'mouseover');
+        $('.subjectslot').mouseover(showEdit);
+        registerBindingForClearance('.subjectslot', 'mouseover');
+        $('.subjectslot').mouseout(_maybeHideEdit);
+        registerBindingForClearance('.subjectslot', 'mouseout');
+        $('#dayTimeScale').show();
+        $('.subjectslot').mouseover(function(){$(this).css('cursor', 'pointer');});
+        registerBindingForClearance('.subjectslot', 'mouseover');
+
+        $('#startDay').val(_getFulldayName(_getFirstDay()));
+        $('#startHour').val(time.start.hour);
+        $('#startMinute').val(pad0(time.start.minute));
+        $('#scaleSelect').val(settings.schedule.pixel_per_minute.toString());
+        $('.slot').css('height','30px');
+        $('.slot').css('padding-top','10px');
+        $('.time').css('height','35px');
+        $('.time').css('padding-top','10px');
+
+        $('#newSubject').keyup(esdKeyUp);
+        registerBindingForClearance('#newSubject', 'keyup');
+        $('#newDuration').keyup(esdKeyUp);
+        registerBindingForClearance('#newDuration', 'keyup');
+        $('#newDuration').keyup(animateSlotSize);
+        registerBindingForClearance('#newDuration', 'keyup');
+
+        $('.day').mouseover(showEdit);
+        registerBindingForClearance('.day', 'mouseover');
+        $('.day').mouseout(_maybeHideEdit);
+        registerBindingForClearance('.day', 'mouseout');
+        $('.day').mouseover(function(){$(this).css('cursor', 'pointer');});
+        registerBindingForClearance('.day', 'mouseover');
+
+        $('button#addduration').bind('click', function() {
+            newValue = _intValue($('#newduration').val());
+            if (isNaN(newValue)) {
+                return;
+            }
+            time.durations.push(newValue);
+            rerender();
+            $('#newduration').val(newValue);
+        });
+        registerBindingForClearance('button#adddurationc', 'click');
+
+        $('#subjectBgColor').bind('change', updateSubjectBagroundColor);
+        registerBindingForClearance('#subjectBgColor', 'change');
+    }
+    function updateSubjectBagroundColor(evt) {
+        var subject = $(elementToEdit).html(),
+            klass = getSubjectCssClassName({ s:subject });
+
+        $('.' + klass).css('background-color', $(this).val());
+        $(elementToEdit).css('background-color', $(this).val());
     }
     function esdKeyUp(e) {
         var subject,
