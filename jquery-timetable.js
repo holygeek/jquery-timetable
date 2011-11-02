@@ -1439,6 +1439,22 @@
         editSubjectDialog.show('fast');
         $('#newSubject').focus().select();
     }
+    function _editTime(target) {
+        var editTimeDialog = $('#editTimeDialog'),
+            slotId = $(target).attr('id'),
+            height = outerHeight(slotId),
+            i,
+            duration
+        ;
+        editTimeDialog.css('left', x(slotId) + halfWidth(slotId) - halfWidth('editTimeDialog'));
+        editTimeDialog.css('top', y(slotId) + height);
+        i = getSelectedIndex(target);
+        duration = settings.schedule.time.durations[i.idx];
+        $('#newTimeDuration').val(duration);
+        hideEdit();
+        editTimeDialog.show('fast');
+        $('#newTimeDuration').focus().select();
+    }
     function editSlot(evt) {
         thisIsANewSlot = 0;
         elementToEdit = currMouseOvered;
@@ -1892,22 +1908,6 @@
         _swapTwoArrayElements(settings.schedule.internal[i.row], i.idx, i.idx - 1);
         rerender();
         hideEdit();
-    }
-    function _editTime(target) {
-        var editTimeDialog = $('#editTimeDialog'),
-            slotId = $(target).attr('id'),
-            height = outerHeight(slotId),
-            i,
-            duration
-        ;
-        editTimeDialog.css('left', x(slotId) + halfWidth(slotId) - halfWidth('editTimeDialog'));
-        editTimeDialog.css('top', y(slotId) + height);
-        i = getSelectedIndex(target);
-        duration = settings.schedule.time.durations[i.idx];
-        $('#newTimeDuration').val(duration);
-        hideEdit();
-        editTimeDialog.show('fast');
-        $('#newTimeDuration').focus().select();
     }
     function askForBooks() {
         var whenshown;
