@@ -1525,6 +1525,15 @@
         rerender();
         hideEdit();
     }
+    function _moveSubjectLeft(slotToMove) {
+        var i = getSelectedIndex(slotToMove);
+        if (i.idx <= 1) {
+            return;
+        }
+        _swapTwoArrayElements(settings.schedule.internal[i.row], i.idx, i.idx - 1);
+        rerender();
+        hideEdit();
+    }
     function moveLeft(evt) {
         var slotToMove = currMouseOvered;
         if (onTime) {
@@ -1932,15 +1941,6 @@
             return;
         }
         _swapTwoArrayElements(row, i.idx, i.idx + 1);
-        rerender();
-        hideEdit();
-    }
-    function _moveSubjectLeft(slotToMove) {
-        var i = getSelectedIndex(slotToMove);
-        if (i.idx <= 1) {
-            return;
-        }
-        _swapTwoArrayElements(settings.schedule.internal[i.row], i.idx, i.idx - 1);
         rerender();
         hideEdit();
     }
