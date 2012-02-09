@@ -2212,7 +2212,7 @@
                         [ {"s": "Su", "d": dayWidth, "c": "day"} ]
                     ],
                     bgColor : {},
-                    booksFor: [],
+                    booksFor: {},
                     pixel_per_minute: 1.8
                 },
                 eventBindings: {},
