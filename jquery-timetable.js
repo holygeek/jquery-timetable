@@ -314,7 +314,7 @@
             take.out.subjects.push({ s: subject.s, books: booksOut });
         }
         if (hasBookIn) {
-            take['in'].text.push(_buildTakeInOutDiv(subject));
+            take['in'].subjects.push( { s: subject.s, books: booksIn  });
         }
     }
     function _getFulldayName(shortName) {
