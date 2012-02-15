@@ -112,16 +112,16 @@ asyncTest("First Load", function() {
   equal($('#startMinute').val(), '40', 'Start minute is 40');
   var hourSelectedText = $("#startHour option[value='" + $('#startHour').val() + "']").text();
   var minuteSelectedText = $("#startMinute option[value='" + $('#startMinute').val() + "']").text();
-  equals(hourSelectedText, '07', "Start hour selected shown is 07");
-  equals(minuteSelectedText, '40', "Start minute selected shown is 40");
+  equal(hourSelectedText, '07', "Start hour selected shown is 07");
+  equal(minuteSelectedText, '40', "Start minute selected shown is 40");
 
   equal($('#time0').html(), '07:40<br>08:10', 'Start time displayed correctly');
 
   equal($('#startDay').val(), 'Monday', 'Start day is Monday');
   equal($('#j0_0').html(), 'Mo', "First day is Monday");
 
-  equals($('#t0').html(), 'Monday', 'First Previous button is Monday');
-  equals($('#b0').html(), 'Monday', 'First Next button is Monday');
+  equal($('#t0').html(), 'Monday', 'First Previous button is Monday');
+  equal($('#b0').html(), 'Monday', 'First Next button is Monday');
   start();
 });
 
@@ -141,8 +141,8 @@ asyncTest("Change start day", function() {
 
     dayIndex = 6;
     for (i = 0; i < 7; i++) {
-        equals($('#t' + i).html(), days[dayIndex], 'Sunday start day: Previous button are ok');
-        equals($('#b' + i).html(), days[dayIndex], 'Sunday start day: Next button are ok');
+        equal($('#t' + i).html(), days[dayIndex], 'Sunday start day: Previous button are ok');
+        equal($('#b' + i).html(), days[dayIndex], 'Sunday start day: Next button are ok');
         dayIndex++;
         if (dayIndex > 6) {
             dayIndex = 0;
@@ -160,8 +160,8 @@ asyncTest("Change start day", function() {
 
     dayIndex = 3;
     for (i = 0; i < 7; i++) {
-        equals($('#t' + i).html(), days[dayIndex], 'Thursday start day: Previous button are ok');
-        equals($('#b' + i).html(), days[dayIndex], 'Thursday start day: Next button are ok');
+        equal($('#t' + i).html(), days[dayIndex], 'Thursday start day: Previous button are ok');
+        equal($('#b' + i).html(), days[dayIndex], 'Thursday start day: Next button are ok');
         dayIndex++;
         if (dayIndex > 6) {
             dayIndex = 0;
@@ -179,8 +179,8 @@ asyncTest("Change start day", function() {
 
     dayIndex = 0;
     for (i = 0; i < 7; i++) {
-        equals($('#t' + i).html(), days[dayIndex], 'Monday start day: Previous button are ok');
-        equals($('#b' + i).html(), days[dayIndex], 'Monday start day: Next button are ok');
+        equal($('#t' + i).html(), days[dayIndex], 'Monday start day: Previous button are ok');
+        equal($('#b' + i).html(), days[dayIndex], 'Monday start day: Next button are ok');
         dayIndex++;
         if (dayIndex > 6) {
             dayIndex = 0;
@@ -309,7 +309,7 @@ asyncTest("Add before first subject", function() {
   // that empty subjects has no book.
   $('#editSubjectDialog #newSubject').autotype("{{back}}P");
   $('#nobooks').trigger('click');
-  equals($('#nobooks').prop('checked'), true, 'No books checkbox is checked for P');
+  equal($('#nobooks').prop('checked'), true, 'No books checkbox is checked for P');
   $('#esdOK').trigger('click');
   j = getScheduleObject(schedule);
   equal(j.dailySlots.Monday[0].s, 'P', "Monday first subject is 'P'");
@@ -328,7 +328,7 @@ asyncTest("Add at end of Monday", function() {
   $(secondMoSubject).trigger('mouseover');
   ok(isVisible('#editOption'), "Edit option is visible on mouseover of second subject of Monday");
   $('#insertAfter').trigger('click');
-  equals($(newlyAdded).html(), '', "Default new subject name is ''");
+  equal($(newlyAdded).html(), '', "Default new subject name is ''");
   ok(!isVisible('#editOption'), "Edit option is not visible on clicking insert right button");
   ok(isVisible('#editSubjectDialog'), "Edit subject dialog is visible after clicking insert right button");
   $('#esdOK').trigger('click');
@@ -699,45 +699,45 @@ asyncTest("Change start minute from 40 to 00", function() {
 
 asyncTest("Move subject left", function() {
     expect(4);
-    equals($('#j0_1').html(), 'P', "1st subject Monday is 'P'");
-    equals($('#j0_2').html(), 'BM', "2nd subject Monday is 'BM'");
+    equal($('#j0_1').html(), 'P', "1st subject Monday is 'P'");
+    equal($('#j0_2').html(), 'BM', "2nd subject Monday is 'BM'");
     $('#j0_2').trigger('mouseover');
     $('#moveLeft').trigger('click');
-    equals($('#j0_1').html(), 'BM', "1st subject Monday is 'BM'");
-    equals($('#j0_2').html(), 'P', "2nd subject Monday is 'P'");
+    equal($('#j0_1').html(), 'BM', "1st subject Monday is 'BM'");
+    equal($('#j0_2').html(), 'P', "2nd subject Monday is 'P'");
     start();
 });
 
 asyncTest("Move subject right", function() {
     expect(4);
-    equals($('#j0_1').html(), 'BM', "1st subject Monday is 'BM'");
-    equals($('#j0_2').html(), 'P', "2nd subject Monday is 'P'");
+    equal($('#j0_1').html(), 'BM', "1st subject Monday is 'BM'");
+    equal($('#j0_2').html(), 'P', "2nd subject Monday is 'P'");
     $('#j0_1').trigger('mouseover');
     $('#moveRight').trigger('click');
-    equals($('#j0_1').html(), 'P', "1st subject Monday is 'P'");
-    equals($('#j0_2').html(), 'BM', "2nd subject Monday is 'BM'");
+    equal($('#j0_1').html(), 'P', "1st subject Monday is 'P'");
+    equal($('#j0_2').html(), 'BM', "2nd subject Monday is 'BM'");
     start();
 });
 
 asyncTest("Move time left", function() {
     expect(4);
-    equals($('#time1').html(), '08:30<br>09:00', "2nd time is 08:30 to 09:00");
-    equals($('#time2').html(), '09:00<br>09:40', "3rd time is 09:00 to 09:40");
+    equal($('#time1').html(), '08:30<br>09:00', "2nd time is 08:30 to 09:00");
+    equal($('#time2').html(), '09:00<br>09:40', "3rd time is 09:00 to 09:40");
     $('#time2').trigger('mouseover');
     $('#moveLeft').trigger('click');
-    equals($('#time1').html(), '08:30<br>09:10', "2nd time is 08:30 to 09:10");
-    equals($('#time2').html(), '09:10<br>09:40', "3rd time is 09:10 to 09:40");
+    equal($('#time1').html(), '08:30<br>09:10', "2nd time is 08:30 to 09:10");
+    equal($('#time2').html(), '09:10<br>09:40', "3rd time is 09:10 to 09:40");
     start();
 });
 
 asyncTest("Move time right", function() {
     expect(4);
-    equals($('#time1').html(), '08:30<br>09:10', "2nd time is 08:30 to 09:10");
-    equals($('#time2').html(), '09:10<br>09:40', "3rd time is 09:10 to 09:40");
+    equal($('#time1').html(), '08:30<br>09:10', "2nd time is 08:30 to 09:10");
+    equal($('#time2').html(), '09:10<br>09:40', "3rd time is 09:10 to 09:40");
     $('#time1').trigger('mouseover');
     $('#moveRight').trigger('click');
-    equals($('#time1').html(), '08:30<br>09:00', "2nd time is 08:30 to 09:00");
-    equals($('#time2').html(), '09:00<br>09:40', "3rd time is 09:00 to 09:40");
+    equal($('#time1').html(), '08:30<br>09:00', "2nd time is 08:30 to 09:00");
+    equal($('#time2').html(), '09:00<br>09:40', "3rd time is 09:00 to 09:40");
     start();
 });
 
@@ -751,18 +751,18 @@ asyncTest("Retain selected next and prev buttons on start day change", function(
 
     expect(110);
 
-    equals(prev.html(), 'Monday', "Previous selected is Monday");
-    equals(next.html(), 'Tuesday', "Next selected is Tuesday");
+    equal(prev.html(), 'Monday', "Previous selected is Monday");
+    equal(next.html(), 'Tuesday', "Next selected is Tuesday");
 
     prev.trigger('click');
     next.trigger('click');
 
     takein = $('#takein .boxee');
-    equals(takein.size(), 1, 'Only one subject in take in box');
-    equals(takein.html(), 'PS', 'That subject is PS');
+    equal(takein.size(), 1, 'Only one subject in take in box');
+    equal(takein.html(), 'PS', 'That subject is PS');
     takeout = $('#takeout .boxee');
-    equals(takeout.size(), 1, 'Only one subject in take out box');
-    equals(takeout.html(), 'BM', 'That subject is BM');
+    equal(takeout.size(), 1, 'Only one subject in take out box');
+    equal(takeout.html(), 'BM', 'That subject is BM');
 
     // Start day change forward Monday -> Sunday
     for(i = 1; i < days.length; i++) {
@@ -770,16 +770,16 @@ asyncTest("Retain selected next and prev buttons on start day change", function(
         $('#startDay').val(days[i]).trigger('change');
         prev = $('#compareContainer1 button.selected');
         next = $('#compareContainer2 button.selected');
-        equals(prev.size(), 1, 'Only one previous button is selected');
-        equals($(prev[0]).html(), 'Monday', 'That button is Monday');
-        equals(next.size(), 1, 'Only one next button is selected');
-        equals($(next[0]).html(), 'Tuesday', 'That button is Tuesday');
+        equal(prev.size(), 1, 'Only one previous button is selected');
+        equal($(prev[0]).html(), 'Monday', 'That button is Monday');
+        equal(next.size(), 1, 'Only one next button is selected');
+        equal($(next[0]).html(), 'Tuesday', 'That button is Tuesday');
         takein = $('#takein .boxee');
-        equals(takein.size(), 1, 'Only one subject in take in box');
-        equals(takein.html(), 'PS', 'That subject is PS');
+        equal(takein.size(), 1, 'Only one subject in take in box');
+        equal(takein.html(), 'PS', 'That subject is PS');
         takeout = $('#takeout .boxee');
-        equals(takeout.size(), 1, 'Only one subject in take out box');
-        equals(takeout.html(), 'BM', 'That subject is BM');
+        equal(takeout.size(), 1, 'Only one subject in take out box');
+        equal(takeout.html(), 'BM', 'That subject is BM');
     }
 
     // Start day change backward Sunday -> Monday
@@ -788,16 +788,16 @@ asyncTest("Retain selected next and prev buttons on start day change", function(
         $('#startDay').val(days[i]).trigger('change');
         prev = $('#compareContainer1 button.selected');
         next = $('#compareContainer2 button.selected');
-        equals(prev.size(), 1, 'Only one previous button is selected');
-        equals($(prev[0]).html(), 'Monday', 'That button is Monday');
-        equals(next.size(), 1, 'Only one next button is selected');
-        equals($(next[0]).html(), 'Tuesday', 'That button is Tuesday');
+        equal(prev.size(), 1, 'Only one previous button is selected');
+        equal($(prev[0]).html(), 'Monday', 'That button is Monday');
+        equal(next.size(), 1, 'Only one next button is selected');
+        equal($(next[0]).html(), 'Tuesday', 'That button is Tuesday');
         takein = $('#takein .boxee');
-        equals(takein.size(), 1, 'Only one subject in take in box');
-        equals(takein.html(), 'PS', 'That subject is PS');
+        equal(takein.size(), 1, 'Only one subject in take in box');
+        equal(takein.html(), 'PS', 'That subject is PS');
         takeout = $('#takeout .boxee');
-        equals(takeout.size(), 1, 'Only one subject in take out box');
-        equals(takeout.html(), 'BM', 'That subject is BM');
+        equal(takeout.size(), 1, 'Only one subject in take out box');
+        equal(takeout.html(), 'BM', 'That subject is BM');
     }
 
 
@@ -821,7 +821,7 @@ asyncTest("Serialize", function() {
         keyCount += 1;
         ok(expectedTopLevelKeys[key], key + " is one of allowed toplevel keys in j");
     }
-    equals(keyCount, 6, "There are exactly six entries in j after serialization");
+    equal(keyCount, 6, "There are exactly six entries in j after serialization");
 
     ok(firstSubjectMonday.nobook == 1, ".nobook exists after serialization");
     ok(firstSubjectMonday.s == 'P', ".s exists after serialization");
@@ -845,7 +845,7 @@ asyncTest("Add time", function() {
     expect(1);
     $('#newduration').val('300');
     $('button#addduration').trigger('click');
-    equals($('#time4').html(), '10:10<br>15:10', "New time added using quick widget is correct");
+    equal($('#time4').html(), '10:10<br>15:10', "New time added using quick widget is correct");
     start();
 });
 
@@ -856,22 +856,22 @@ asyncTest("Quick add time button is disabled when edit subject dialog is shown",
     ok(isVisible('#editSubject'), "Edit subject button in edit subject widget is visible");
     $('#editSubject').trigger('click');
     ok(isVisible('#editSubjectDialog'), "Edit subject dialog is visible");
-    equals($('#addduration').attr('disabled'), 'disabled',
+    equal($('#addduration').attr('disabled'), 'disabled',
         "Quick add duration button must be disabled when edit subject dialog appears");
     $('#esdCancel').trigger('click');
     ok(!isVisible('#editSubjectDialog'), "Edit subject dialog is not visible");
-    equals($('#addduration').attr('disabled'), undefined,
+    equal($('#addduration').attr('disabled'), undefined,
         "Quick add duration button must be enabled after esdCancel button is clicked");
 
     $(mondayFirst).trigger('mouseover');
     ok(isVisible('#editSubject'), "2. Edit subject button in edit subject widget is visible");
     $('#editSubject').trigger('click');
     ok(isVisible('#editSubjectDialog'), "2. Edit subject dialog is visible");
-    equals($('#addduration').attr('disabled'), 'disabled',
+    equal($('#addduration').attr('disabled'), 'disabled',
         "2. Quick add duration button must be disabled when edit subject dialog appears");
     $('#esdOK').trigger('click');
     ok(!isVisible('#editSubjectDialog'), "2. Edit subject dialog is not visible");
-    equals($('#addduration').attr('disabled'), undefined,
+    equal($('#addduration').attr('disabled'), undefined,
         "Quick add duration button must be enabled after esdOK button is clicked");
     start();
 });
@@ -883,22 +883,22 @@ asyncTest("Quick add time button is disabled when edit time dialog is shown", fu
     ok(isVisible('#editSubject'), "Edit time button in edit subject widget is visible");
     $('#editSubject').trigger('click');
     ok(isVisible('#editTimeDialog'), "Edit time dialog is visible");
-    equals($('#addduration').attr('disabled'), 'disabled',
+    equal($('#addduration').attr('disabled'), 'disabled',
         "2. Quick add duration button must be disabled when edit time dialog appears");
     $('#etdCancel').trigger('click');
     ok(!isVisible('#editTimeDialog'), "Edit time dialog is not visible");
-    equals($('#addduration').attr('disabled'), undefined,
+    equal($('#addduration').attr('disabled'), undefined,
         "Quick add duration button must be enabled after etdCancel button is clicked");
 
     $(timeFirst).trigger('mouseover');
     ok(isVisible('#editSubject'), "2. Edit time button in edit subject widget is visible");
     $('#editSubject').trigger('click');
     ok(isVisible('#editTimeDialog'), "2. Edit time dialog is visible");
-    equals($('#addduration').attr('disabled'), 'disabled',
+    equal($('#addduration').attr('disabled'), 'disabled',
         "2. Quick add duration button must be disabled when edit time dialog appears");
     $('#etdOK').trigger('click');
     ok(!isVisible('#editTimeDialog'), "2. Edit time dialog is not visible");
-    equals($('#addduration').attr('disabled'), undefined,
+    equal($('#addduration').attr('disabled'), undefined,
         "Quick add duration button must be enabled after etdOK button is clicked");
     start();
 });
@@ -930,7 +930,7 @@ asyncTest("Slot width", function() {
     });
     schedule.timetable('rerender');
 
-    equals($(secondSixty).offset().left, $(thirdTime).offset().left, "Second subject aligns with start of third time slot");
+    equal($(secondSixty).offset().left, $(thirdTime).offset().left, "Second subject aligns with start of third time slot");
     start();
 });
 
@@ -939,7 +939,7 @@ asyncTest("Reinitialize with no option", function() {
     expect(1);
     schedule.timetable();
     schedule.timetable('rerender');
-    equals($('#adddurationc').size(), 0, "#adddurationc (Quick add duration widget) does not exists");
+    equal($('#adddurationc').size(), 0, "#adddurationc (Quick add duration widget) does not exists");
     start();
 });
 
@@ -966,8 +966,8 @@ asyncTest("Setup", function() {
     $('#esdOK').trigger('click');
 
     dailySlots = getScheduleObject(schedule).dailySlots;
-    equals(dailySlots.Monday[0].s, 'M', "First Monday subject is M");
-    equals(dailySlots.Friday[0].s, 'F', "First Friday subject is F");
+    equal(dailySlots.Monday[0].s, 'M', "First Monday subject is M");
+    equal(dailySlots.Friday[0].s, 'F', "First Friday subject is F");
     start();
 });
 
@@ -1001,7 +1001,7 @@ asyncTest("nobook is set for subject with no name", function() {
     $('#newSubject').autotype('{{back}}');
     $('#esdOK').trigger('click');
     dailySlots = getScheduleObject(schedule).dailySlots;
-    equals(dailySlots.Wednesday[0].nobook, true, "nobook flag for Wednesday first subject is set");
+    equal(dailySlots.Wednesday[0].nobook, true, "nobook flag for Wednesday first subject is set");
     start();
 });
 
@@ -1026,7 +1026,7 @@ asyncTest("Add book, then Cancel functionality", function() {
     $('#esdCancel').trigger('click');
     ok(!isVisible('#editSubjectDialog'), "Edit subject dialog is now hidden");
 
-    equals(schedule.timetable('getBooksFor', {s:'M'}).length, 0, "No book added for M");
+    equal(schedule.timetable('getBooksFor', {s:'M'}).length, 0, "No book added for M");
 
     start();
 });
@@ -1052,9 +1052,9 @@ asyncTest("Add book, then OK functionality", function() {
     $('#esdOK').trigger('click');
     ok(!isVisible('#editSubjectDialog'), "Edit subject dialog is now hidden");
 
-    equals(schedule.timetable('getBooksFor', {s:'M'}).length, 1, "1 book added for M");
-    equals(schedule.timetable('getBooksFor', {s:'M'})[0], 'M aBook 1', "That book is 'M aBook 1'");
-    equals(schedule.timetable('getBooksFor', {s:'F'}).length, 0, "No book added for F");
+    equal(schedule.timetable('getBooksFor', {s:'M'}).length, 1, "1 book added for M");
+    equal(schedule.timetable('getBooksFor', {s:'M'})[0], 'M aBook 1', "That book is 'M aBook 1'");
+    equal(schedule.timetable('getBooksFor', {s:'F'}).length, 0, "No book added for F");
 
     start();
 });
@@ -1064,10 +1064,10 @@ asyncTest("Monday->Tuesday M ABook 1 must be in take out list", function() {
     $('#t0').trigger('click');
     $('#b1').trigger('click');
     ok(isVisible('#inoutbook', "In out book table is shown"));
-    equals($('#inoutbook tr').size(), 3, "It has 3 rows");
-    equals($('#inoutbook tr:last td:last div:first').html(),
+    equal($('#inoutbook tr').size(), 3, "It has 3 rows");
+    equal($('#inoutbook tr:last td:last div:first').html(),
         'M aBook 1', "M aBook 1 is shown in out list for Tuesday");
-    equals($('#inoutbook tr:last td:first').html(), '&nbsp;',
+    equal($('#inoutbook tr:last td:first').html(), '&nbsp;',
         "No book to be put in for Tuesday");
     start();
 });
@@ -1077,10 +1077,10 @@ asyncTest("Tuesday->Monday M ABook 1 must be in put in list", function() {
     $('#t1').trigger('click');
     $('#b0').trigger('click');
     ok(isVisible('#inoutbook', "In out book table is shown"));
-    equals($('#inoutbook tr').size(), 3, "It has 3 rows");
-    equals($($('#inoutbook tr:last td div')[1]).html(),
+    equal($('#inoutbook tr').size(), 3, "It has 3 rows");
+    equal($($('#inoutbook tr:last td div')[1]).html(),
         'M aBook 1', "M aBook 1 is shown in put in list for Monday");
-    equals($('#inoutbook tr:last td').size(), 2,
+    equal($('#inoutbook tr:last td').size(), 2,
         "No book to be taken out for Monday");
     start();
 });
@@ -1092,17 +1092,17 @@ asyncTest("Add M on Wednesday with text book set to not use.", function() {
     $('#newSubject').autotype('{{back}}M');
     $('#addbooks').trigger('click');
 
-    equals($('#bookUseHere_0').prop('checked'), true,
+    equal($('#bookUseHere_0').prop('checked'), true,
         "Need to use 'M aBook 1' here is set (assumed)");
     $('#bookUseHere_0').trigger('click');
-    equals($('#bookUseHere_0').prop('checked'), false,
+    equal($('#bookUseHere_0').prop('checked'), false,
         "Use here checkbox is now unset");
     $('#addBookOk').trigger('click');
     $('#esdOK').trigger('click');
     j = getScheduleObject(schedule).dailySlots;
-    equals(j.Monday[0].books['M aBook 1'], true,
+    equal(j.Monday[0].books['M aBook 1'], true,
         "'M aBook 1' is used on Monday");
-    equals(j.Wednesday[1].books['M aBook 1'], false,
+    equal(j.Wednesday[1].books['M aBook 1'], false,
         "'M aBook 1' is not used on Wednesday");
     start();
 });
@@ -1113,10 +1113,10 @@ asyncTest("Wednesday->Monday 'M aBook 1' must be the only one in take in list", 
     selectNext('Monday');
     ok(isVisible('#inoutbook', "use here: In out book table is shown"));
     ok($('#inoutbook').html() != '', "use here: In out book table is not empty");
-    equals($('#inoutbook tr').size(), 3, "use here: In out book table has 3 rows");
-    equals($($('#inoutbook tr:last td div')[1]).html(),
+    equal($('#inoutbook tr').size(), 3, "use here: In out book table has 3 rows");
+    equal($($('#inoutbook tr:last td div')[1]).html(),
         'M aBook 1', "use here: M aBook 1 is shown in put in list for Monday");
-    equals($('#inoutbook tr:last td').size(), 2,
+    equal($('#inoutbook tr:last td').size(), 2,
         "No book to be taken out for Monday");
     start();
 });
@@ -1128,14 +1128,14 @@ asyncTest("Monday->Wednesday 'M aBook 1' must be the only one in take out list",
     selectNext('Wednesday');
     ok(isVisible('#inoutbook', "use here M->W: In out book table is shown"));
     ok($('#inoutbook').html() != '', "use here M->W: In out book table is not empty");
-    equals($('#inoutbook tr').size(), 3, "use here M->W: In out book table has 3 rows");
+    equal($('#inoutbook tr').size(), 3, "use here M->W: In out book table has 3 rows");
     divs = $('#inoutbook tr:last td div');
-    equals(divs.size(), 2, "There are ony two divs in in out book table");
-    equals($(divs[1]).html(), 'M aBook 1',
+    equal(divs.size(), 2, "There are ony two divs in in out book table");
+    equal($(divs[1]).html(), 'M aBook 1',
         "use here M->W: M aBook 1 is shown in put out list for Monday");
 
     tds = $('#inoutbook tr:last td');
-    equals($(tds[0]).html() + $(tds[1]).html(), '&nbsp;&nbsp;',
+    equal($(tds[0]).html() + $(tds[1]).html(), '&nbsp;&nbsp;',
         "No book to be taken in for Monday");
     start();
 });
@@ -1145,8 +1145,8 @@ asyncTest("Add Common Book to subject M, ensure that existing status in other sl
     addBookToSlot(0, 1, 'M Common');
     editSubject(2, 2);
     clickBooksButton();
-    equals(getCheckBoxStatus('#bookUseHere_0'), false, "M Book 1 is not used here");
-    equals(getCheckBoxStatus('#bookUseHere_1'),  true, "M Common is used here");
+    equal(getCheckBoxStatus('#bookUseHere_0'), false, "M Book 1 is not used here");
+    equal(getCheckBoxStatus('#bookUseHere_1'),  true, "M Common is used here");
     clickAddBookCancelButton();
     clickEditSubjectDialogCancelButton();
     start();
@@ -1161,10 +1161,10 @@ asyncTest("Monday->Wednesday: Common Book should not be taken out or in", functi
     selectNext('Wednesday');
     ok(isVisible('#inoutbook', tag + "In out book table is shown"));
     ok($('#inoutbook').html() != '', tag + "In out book table is not empty");
-    equals($('#inoutbook tr').size(), 3, tag + "In out book table has 3 rows");
+    equal($('#inoutbook tr').size(), 3, tag + "In out book table has 3 rows");
     divs = $('#inoutbook div');
-    equals(divs.size(), 2, tag + "Only one boxee and one book is shown");
-    equals($(divs[1]).html(), 'M aBook 1', tag + "That book is 'M aBook 1'");
+    equal(divs.size(), 2, tag + "Only one boxee and one book is shown");
+    equal($(divs[1]).html(), 'M aBook 1', tag + "That book is 'M aBook 1'");
     start();
 });
 
@@ -1177,10 +1177,10 @@ asyncTest("Wednesday->Thursday: Only Common Book should be taken out", function(
     selectNext('Thursday');
     ok(isVisible('#inoutbook', tag + "In out book table is shown"));
     ok($('#inoutbook').html() != '', tag + "In out book table is not empty");
-    equals($('#inoutbook tr').size(), 3, tag + "In out book table has 3 rows");
+    equal($('#inoutbook tr').size(), 3, tag + "In out book table has 3 rows");
     divs = $('#inoutbook div');
-    equals(divs.size(), 2, tag + "Only one boxee and one book is shown");
-    equals($(divs[1]).html(), 'M Common', tag + "That book is 'M Common'");
+    equal(divs.size(), 2, tag + "Only one boxee and one book is shown");
+    equal($(divs[1]).html(), 'M Common', tag + "That book is 'M Common'");
     start();
 });
 
@@ -1197,11 +1197,11 @@ asyncTest("Monday->Friday No book flag set on subject that has books", function(
     selectNext('Friday');
     ok(isVisible('#inoutbook', tag + "In out book table is shown"));
     ok($('#inoutbook').html() != '', tag + "In out book table is not empty");
-    equals($('#inoutbook tr').size(), 3, tag + "In out book table has 4 rows");
+    equal($('#inoutbook tr').size(), 3, tag + "In out book table has 4 rows");
     divs = $('#inoutbook tr:last div');
-    equals(divs.size(), 4, tag + "Two boxees and two book names are shown");
-    equals($(divs[2]).html(), 'M aBook 1');
-    equals($(divs[3]).html(), 'M Common');
+    equal(divs.size(), 4, tag + "Two boxees and two book names are shown");
+    equal($(divs[2]).html(), 'M aBook 1');
+    equal($(divs[3]).html(), 'M Common');
     start();
 });
 
@@ -1214,18 +1214,18 @@ asyncTest("Friday->Monday No book flag set on subject that has books", function(
     selectNext('Monday');
     ok(isVisible('#inoutbook', tag + "In out book table is shown"));
     ok($('#inoutbook').html() != '', tag + "In out book table is not empty");
-    equals($('#inoutbook tr').size(), 3, tag + "In out book table has 4 rows");
+    equal($('#inoutbook tr').size(), 3, tag + "In out book table has 4 rows");
     divs = $('#inoutbook tr:last div');
-    equals(divs.size(), 4, tag + "Two boxees and two book names are shown");
+    equal(divs.size(), 4, tag + "Two boxees and two book names are shown");
     divs = $('#inoutbook tr:last td:first div');
-    equals(divs.size(), 1);
-    equals($(divs).html(), 'M', 'The only "In" subject shown is M');
+    equal(divs.size(), 1);
+    equal($(divs).html(), 'M', 'The only "In" subject shown is M');
     divs = $('#inoutbook tr:last td div');
-    equals(divs.size(), 4);
-    equals($(divs[0]).html(), 'M', 'boxee');
-    equals($(divs[1]).html(), 'M aBook 1');
-    equals($(divs[2]).html(), 'M Common');
-    equals($(divs[3]).html(), 'F', 'boxee');
+    equal(divs.size(), 4);
+    equal($(divs[0]).html(), 'M', 'boxee');
+    equal($(divs[1]).html(), 'M aBook 1');
+    equal($(divs[2]).html(), 'M Common');
+    equal($(divs[3]).html(), 'F', 'boxee');
     start();
 });
 
@@ -1260,8 +1260,8 @@ asyncTest("Click add when no book is entered", function() {
     selectNext('Tuesday');
 
     takeout = $('#takeout .boxee');
-    equals(takeout.size(), 1, 'Only one subject in take out box');
-    equals(takeout.html(), 'A', 'That subject is A');
+    equal(takeout.size(), 1, 'Only one subject in take out box');
+    equal(takeout.html(), 'A', 'That subject is A');
     start();
 });
 
@@ -1273,7 +1273,7 @@ asyncTest("Cancelling add book, then cancelling edit subject should not modify s
     clickAddBookButton();
     clickAddBookCancelButton();
     clickEditSubjectDialogCancelButton();
-    equals($('#j0_1').html(), 'A', "Subject A is not modified");
+    equal($('#j0_1').html(), 'A', "Subject A is not modified");
     start();
 });
 
@@ -1287,7 +1287,7 @@ asyncTest("Subject name must not be modified after esdCancel after books is adde
     $('input#bookname').val('Aee Book 1');
     clickAddBookOKButton();
     clickEditSubjectDialogCancelButton();
-    equals($('#j0_1').html(), 'A', "Subject A must not be modified");
+    equal($('#j0_1').html(), 'A', "Subject A must not be modified");
     start();
 });
 
@@ -1321,7 +1321,7 @@ asyncTest("Start day is Sunday", function() {
     expect(1);
     schedule.timetable({ schedule: sched, edit: true });
     schedule.timetable('render');
-    equals($('#j0_0').html(), 'Fr', "Start day is Friday");
+    equal($('#j0_0').html(), 'Fr', "Start day is Friday");
     start();
 });
 
