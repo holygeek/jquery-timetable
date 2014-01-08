@@ -4,3 +4,6 @@
 [submodule "lib/jquery-mColorPicker"]
 	path = lib/jquery-mColorPicker
 	url = https://github.com/meta100/mColorPicker.git
+[submodule "qunit"]
+	path = lib/qunit
+	url = https://github.com/jquery/qunit.git
