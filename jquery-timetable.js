@@ -10,6 +10,7 @@
         timetableId,
         dayWidth = 70, // pixels
         days = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ],
+        defaultNewSubjectColor = 'white',
         editDialogIsVisible = 0,
         settings,
         pendingSlotBooksAction = {},
@@ -265,9 +266,12 @@
     function getSubjectBgColor(subject) {
         var className = getSubjectCssClassName(subject);
         if (className.length > 0) {
-            return settings.schedule.bgColor[className] || 'white';
+            return settings.schedule.bgColor[className];
         }
-        return 'white';
+        return null;
+    }
+    function getSubjectBgColorOrDefaultNewSubjectColor(subject) {
+        return getSubjectBgColor(subject) || defaultNewSubjectColor;
     }
     function _buildTakeInOutDiv(subject, extraclass) {
         var subjectname = subject.s;
@@ -283,7 +287,7 @@
             '"',
             'style="',
             'background-color: ',
-            getSubjectBgColor(subject),
+            getSubjectBgColorOrDefaultNewSubjectColor(subject),
             ';"',
             '>',
             subjectname,
@@ -691,7 +695,7 @@
             style = [
                     'style="',
                     'width: ', width, 'px;',
-                    'background-color: ', getSubjectBgColor(slot), ';',
+                    'background-color: ', getSubjectBgColorOrDefaultNewSubjectColor(slot), ';',
                     '"'
                 ].join(''),
             klass = slot.c || '',
@@ -1048,7 +1052,7 @@
             .removeClass(oldCssClassName)
             .addClass(newCssClassName)
             ;
-        $(id).css('background-color', getSubjectBgColor(newSubject));
+        $(id).css('background-color', getSubjectBgColorOrDefaultNewSubjectColor(newSubject));
         fromOKButton = 'yes';
         hideEditSubjectDialog(null, fromOKButton);
     }
@@ -1068,6 +1072,9 @@
         settings.schedule.time.durations[i.idx] = newTimeDuration;
         mostFrequentDuration = getMostFrequestDuration(settings.schedule.time.durations);
         hideEditTimeDialog();
+    }
+    function isEmptySubject(subject) {
+        return subject.length === 0 || subject.match(/^ *$/)
     }
     function esdKeyUp(e) {
         var subject,
@@ -1094,13 +1101,16 @@
         }
         if (onSubject) {
             subject = replaceUnsaveChars($('#newSubject').val());
-            if (subject.length === 0 || subject.match(/^ *$/)) {
+            if (isEmptySubject(subject)) {
                 $('#nobooks').attr("checked", true);
                 $(elementToEdit).html('');
             } else {
                 $('#nobooks').attr("checked", false);
                 subjectBgColor = getSubjectBgColor({ s: subject });
-                $('#icp_subjectBgColor').css('background-color', subjectBgColor);
+                if (!subjectBgColor)
+                    subjectBgColor = $('#icp_subjectBgColor').css('background-color');
+                else
+                    $('#icp_subjectBgColor').css('background-color', subjectBgColor);
                 $(elementToEdit).css('background-color', subjectBgColor);
                 $('#subjectBgColor').val(subjectBgColor);
                 $(elementToEdit).html(replaceUnsaveChars(subject));
@@ -1428,7 +1438,7 @@
         $('#nobooks').attr('checked', slot.nobook || false);
         currBackground = $(target).css('background-color');
         if (brandNew) {
-            currBackground = getSubjectBgColor(slot);
+            currBackground = getSubjectBgColorOrDefaultNewSubjectColor(slot);
         }
         // $('#subjectBgColor').attr('value', currBackground);
         $('#icp_subjectBgColor').css('background-color', currBackground);
