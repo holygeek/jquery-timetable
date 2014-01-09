@@ -52,7 +52,13 @@
       },
   };
   $(document).ready(function (){
-      $('#sample').timetable({ schedule: schedule, edit: true });
+      $('#sample').timetable({
+        schedule: schedule,
+        edit: true,
+        onchange: function(schedule) {
+          console.log('schedule', schedule);
+        }
+      });
       $('#sample').timetable('render');
   });
   </script>

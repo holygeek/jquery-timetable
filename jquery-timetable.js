@@ -26,6 +26,7 @@
         _Sunday = 6,
         onSubject = false, // Item mouse hovered
         onTime = false,
+        onchangeListeners = [],
         mostFrequentDuration,
         BOOK_DIFF_STAY = 'stay',
         BOOK_DIFF_ADD = 'in',
@@ -1020,6 +1021,11 @@
             settings.schedule.bgColor[subjectCssClassName] = color;
         }
     }
+    function fireOnchangeEvent(schedule) {
+        var i;
+        for (i=0; i < onchangeListeners.length; i++)
+            onchangeListeners[i](schedule);
+    }
     function esdOK() {
         var i,
             dayRow,
@@ -1057,6 +1063,7 @@
         $(id).css('background-color', getSubjectBgColorOrDefaultNewSubjectColor(newSubject));
         fromOKButton = 'yes';
         hideEditSubjectDialog(null, fromOKButton);
+        fireOnchangeEvent(settings.schedule);
     }
     function etdOK() {
         var newTimeDuration,
@@ -1074,6 +1081,7 @@
         settings.schedule.time.durations[i.idx] = newTimeDuration;
         mostFrequentDuration = getMostFrequestDuration(settings.schedule.time.durations);
         hideEditTimeDialog();
+        fireOnchangeEvent(settings.schedule);
     }
     function isEmptySubject(subject) {
         return subject.length === 0 || subject.match(/^ *$/)
@@ -2213,6 +2221,12 @@
                     }
                 }
             }
+        }
+        if (options.onchange) {
+            if (typeof options.onchange === 'function')
+                onchangeListeners.push(options.onchange);
+            else
+                throw("Invalid option value for 'onchange', expecting a function.");
         }
     }
 
