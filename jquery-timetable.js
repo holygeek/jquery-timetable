@@ -1150,7 +1150,7 @@
             setTimeout(animator, durationKeyupTimeout);
         }
     }
-    function updateSubjectBagroundColor(evt) {
+    function updateSubjectBackgroundColor(evt) {
         var subject = $(elementToEdit).html(),
             klass;
         if (!subject) return;
@@ -1218,7 +1218,7 @@
         });
         registerBindingForClearance('button#adddurationc', 'click');
 
-        $('#subjectBgColor').bind('change', updateSubjectBagroundColor);
+        $('#subjectBgColor').bind('change', updateSubjectBackgroundColor);
         registerBindingForClearance('#subjectBgColor', 'change');
     }
     function _setCompareNextDay(dayIdx, buttonEl) {
