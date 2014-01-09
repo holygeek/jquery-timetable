@@ -1152,8 +1152,10 @@
     }
     function updateSubjectBagroundColor(evt) {
         var subject = $(elementToEdit).html(),
-            klass = getSubjectCssClassName({ s:subject });
+            klass;
+        if (!subject) return;
 
+        klass = getSubjectCssClassName({ s:subject });
         $('.' + klass).css('background-color', $(this).val());
         $(elementToEdit).css('background-color', $(this).val());
     }
