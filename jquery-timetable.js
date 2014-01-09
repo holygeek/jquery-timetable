@@ -16,6 +16,8 @@
         pendingSlotBooksAction = {},
         thisIsANewSlot = 0,
         elementToEdit,
+        lastDurationChanged,
+        durationKeyupTimeout = 200,
         clickedDays = [-1, -1],
         USE_HERE = true,
         DO_NOT_USE_HERE = false,
@@ -1119,20 +1121,34 @@
         }
     }
     function animateSlotSize(e) {
-        var text,
-            width;
-        if ($(elementToEdit).attr('id').match(/^j/)) {
-            text = $('#newDuration').val();
+        var animator = function() {
+            var text
+                , width
+                , now
+                ;
+            if (!jQuery.fx.off) {
+                now = new Date().getTime();
+                if (now - lastDurationChanged < durationKeyupTimeout) return;
+            }
+            if ($(elementToEdit).attr('id').match(/^j/)) {
+                text = $('#newDuration').val();
+            } else {
+                text = $('#newTimeDuration').val();
+            }
+            if (!text.match(/^ *[0-9]+ */)) {
+                return;
+            }
+            text = parseInt(text, 10);
+            width = durationToSize(text);
+            $('#' + timetableId).css('width', timetableWidth + width + 'px');
+            $(elementToEdit).animate({width: width + 'px'});
+        };
+        if (jQuery.fx.off) {
+            animator();
         } else {
-            text = $('#newTimeDuration').val();
+            lastDurationChanged = new Date().getTime();
+            setTimeout(animator, durationKeyupTimeout);
         }
-        if (!text.match(/^ *[0-9]+ */)) {
-            return;
-        }
-        text = parseInt(text, 10);
-        width = durationToSize(text);
-        $('#' + timetableId).css('width', timetableWidth + width + 'px');
-        $(elementToEdit).animate({width: width + 'px'});
     }
     function updateSubjectBagroundColor(evt) {
         var subject = $(elementToEdit).html(),
