@@ -806,6 +806,7 @@
         }
 
         shiftUntil(shortDayName);
+        fireOnchangeEvent();
         rerender();
         updatePrevNextButtonText(newStartDay, prevDaySelected, nextDaySelected);
     }
@@ -1021,10 +1022,10 @@
             settings.schedule.bgColor[subjectCssClassName] = color;
         }
     }
-    function fireOnchangeEvent(schedule) {
+    function fireOnchangeEvent() {
         var i;
         for (i=0; i < onchangeListeners.length; i++)
-            onchangeListeners[i](schedule);
+            onchangeListeners[i](settings.schedule);
     }
     function esdOK() {
         var i,
@@ -1063,7 +1064,7 @@
         $(id).css('background-color', getSubjectBgColorOrDefaultNewSubjectColor(newSubject));
         fromOKButton = 'yes';
         hideEditSubjectDialog(null, fromOKButton);
-        fireOnchangeEvent(settings.schedule);
+        fireOnchangeEvent();
     }
     function etdOK() {
         var newTimeDuration,
@@ -1081,7 +1082,7 @@
         settings.schedule.time.durations[i.idx] = newTimeDuration;
         mostFrequentDuration = getMostFrequestDuration(settings.schedule.time.durations);
         hideEditTimeDialog();
-        fireOnchangeEvent(settings.schedule);
+        fireOnchangeEvent();
     }
     function isEmptySubject(subject) {
         return subject.length === 0 || subject.match(/^ *$/)
@@ -1223,6 +1224,7 @@
             time.durations.push(newValue);
             rerender();
             $('#newduration').val(newValue);
+            fireOnchangeEvent();
         });
         registerBindingForClearance('button#adddurationc', 'click');
 
@@ -1942,6 +1944,7 @@
         booklisttable.append(createBookListEntry(nbooks, name, usehere));
         dirtyBookList = $('#booklistheader').html();
         $('#addBookOk').fadeIn();
+        fireOnchangeEvent();
     }
     function getOrCreateSlotBookDict(slot) {
         var books = slot.books;
